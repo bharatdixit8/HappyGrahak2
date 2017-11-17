@@ -1,0 +1,574 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 48;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		81FC4B881FBEF0DB0021DBC1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FC4B871FBEF0DB0021DBC1 /* AppDelegate.swift */; };
+		81FC4B8A1FBEF0DB0021DBC1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FC4B891FBEF0DB0021DBC1 /* ViewController.swift */; };
+		81FC4B8D1FBEF0DB0021DBC1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81FC4B8B1FBEF0DB0021DBC1 /* Main.storyboard */; };
+		81FC4B901FBEF0DB0021DBC1 /* HappyGrahak.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 81FC4B8E1FBEF0DB0021DBC1 /* HappyGrahak.xcdatamodeld */; };
+		81FC4B921FBEF0DB0021DBC1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 81FC4B911FBEF0DB0021DBC1 /* Assets.xcassets */; };
+		81FC4B951FBEF0DB0021DBC1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81FC4B931FBEF0DB0021DBC1 /* LaunchScreen.storyboard */; };
+		81FC4BA01FBEF0DB0021DBC1 /* HappyGrahakTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FC4B9F1FBEF0DB0021DBC1 /* HappyGrahakTests.swift */; };
+		81FC4BAB1FBEF0DB0021DBC1 /* HappyGrahakUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FC4BAA1FBEF0DB0021DBC1 /* HappyGrahakUITests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		81FC4B9C1FBEF0DB0021DBC1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 81FC4B7C1FBEF0DA0021DBC1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 81FC4B831FBEF0DB0021DBC1;
+			remoteInfo = HappyGrahak;
+		};
+		81FC4BA71FBEF0DB0021DBC1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 81FC4B7C1FBEF0DA0021DBC1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 81FC4B831FBEF0DB0021DBC1;
+			remoteInfo = HappyGrahak;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		81FC4B841FBEF0DB0021DBC1 /* HappyGrahak.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HappyGrahak.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		81FC4B871FBEF0DB0021DBC1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		81FC4B891FBEF0DB0021DBC1 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		81FC4B8C1FBEF0DB0021DBC1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		81FC4B8F1FBEF0DB0021DBC1 /* HappyGrahak.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = HappyGrahak.xcdatamodel; sourceTree = "<group>"; };
+		81FC4B911FBEF0DB0021DBC1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		81FC4B941FBEF0DB0021DBC1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		81FC4B961FBEF0DB0021DBC1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		81FC4B9B1FBEF0DB0021DBC1 /* HappyGrahakTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HappyGrahakTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		81FC4B9F1FBEF0DB0021DBC1 /* HappyGrahakTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HappyGrahakTests.swift; sourceTree = "<group>"; };
+		81FC4BA11FBEF0DB0021DBC1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		81FC4BA61FBEF0DB0021DBC1 /* HappyGrahakUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HappyGrahakUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		81FC4BAA1FBEF0DB0021DBC1 /* HappyGrahakUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HappyGrahakUITests.swift; sourceTree = "<group>"; };
+		81FC4BAC1FBEF0DB0021DBC1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		81FC4B811FBEF0DB0021DBC1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		81FC4B981FBEF0DB0021DBC1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		81FC4BA31FBEF0DB0021DBC1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		81FC4B7B1FBEF0DA0021DBC1 = {
+			isa = PBXGroup;
+			children = (
+				81FC4B861FBEF0DB0021DBC1 /* HappyGrahak */,
+				81FC4B9E1FBEF0DB0021DBC1 /* HappyGrahakTests */,
+				81FC4BA91FBEF0DB0021DBC1 /* HappyGrahakUITests */,
+				81FC4B851FBEF0DB0021DBC1 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		81FC4B851FBEF0DB0021DBC1 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				81FC4B841FBEF0DB0021DBC1 /* HappyGrahak.app */,
+				81FC4B9B1FBEF0DB0021DBC1 /* HappyGrahakTests.xctest */,
+				81FC4BA61FBEF0DB0021DBC1 /* HappyGrahakUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		81FC4B861FBEF0DB0021DBC1 /* HappyGrahak */ = {
+			isa = PBXGroup;
+			children = (
+				81FC4B871FBEF0DB0021DBC1 /* AppDelegate.swift */,
+				81FC4B891FBEF0DB0021DBC1 /* ViewController.swift */,
+				81FC4B8B1FBEF0DB0021DBC1 /* Main.storyboard */,
+				81FC4B911FBEF0DB0021DBC1 /* Assets.xcassets */,
+				81FC4B931FBEF0DB0021DBC1 /* LaunchScreen.storyboard */,
+				81FC4B961FBEF0DB0021DBC1 /* Info.plist */,
+				81FC4B8E1FBEF0DB0021DBC1 /* HappyGrahak.xcdatamodeld */,
+			);
+			path = HappyGrahak;
+			sourceTree = "<group>";
+		};
+		81FC4B9E1FBEF0DB0021DBC1 /* HappyGrahakTests */ = {
+			isa = PBXGroup;
+			children = (
+				81FC4B9F1FBEF0DB0021DBC1 /* HappyGrahakTests.swift */,
+				81FC4BA11FBEF0DB0021DBC1 /* Info.plist */,
+			);
+			path = HappyGrahakTests;
+			sourceTree = "<group>";
+		};
+		81FC4BA91FBEF0DB0021DBC1 /* HappyGrahakUITests */ = {
+			isa = PBXGroup;
+			children = (
+				81FC4BAA1FBEF0DB0021DBC1 /* HappyGrahakUITests.swift */,
+				81FC4BAC1FBEF0DB0021DBC1 /* Info.plist */,
+			);
+			path = HappyGrahakUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		81FC4B831FBEF0DB0021DBC1 /* HappyGrahak */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 81FC4BAF1FBEF0DB0021DBC1 /* Build configuration list for PBXNativeTarget "HappyGrahak" */;
+			buildPhases = (
+				81FC4B801FBEF0DB0021DBC1 /* Sources */,
+				81FC4B811FBEF0DB0021DBC1 /* Frameworks */,
+				81FC4B821FBEF0DB0021DBC1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = HappyGrahak;
+			productName = HappyGrahak;
+			productReference = 81FC4B841FBEF0DB0021DBC1 /* HappyGrahak.app */;
+			productType = "com.apple.product-type.application";
+		};
+		81FC4B9A1FBEF0DB0021DBC1 /* HappyGrahakTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 81FC4BB21FBEF0DB0021DBC1 /* Build configuration list for PBXNativeTarget "HappyGrahakTests" */;
+			buildPhases = (
+				81FC4B971FBEF0DB0021DBC1 /* Sources */,
+				81FC4B981FBEF0DB0021DBC1 /* Frameworks */,
+				81FC4B991FBEF0DB0021DBC1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				81FC4B9D1FBEF0DB0021DBC1 /* PBXTargetDependency */,
+			);
+			name = HappyGrahakTests;
+			productName = HappyGrahakTests;
+			productReference = 81FC4B9B1FBEF0DB0021DBC1 /* HappyGrahakTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		81FC4BA51FBEF0DB0021DBC1 /* HappyGrahakUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 81FC4BB51FBEF0DB0021DBC1 /* Build configuration list for PBXNativeTarget "HappyGrahakUITests" */;
+			buildPhases = (
+				81FC4BA21FBEF0DB0021DBC1 /* Sources */,
+				81FC4BA31FBEF0DB0021DBC1 /* Frameworks */,
+				81FC4BA41FBEF0DB0021DBC1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				81FC4BA81FBEF0DB0021DBC1 /* PBXTargetDependency */,
+			);
+			name = HappyGrahakUITests;
+			productName = HappyGrahakUITests;
+			productReference = 81FC4BA61FBEF0DB0021DBC1 /* HappyGrahakUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		81FC4B7C1FBEF0DA0021DBC1 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0900;
+				LastUpgradeCheck = 0900;
+				ORGANIZATIONNAME = IOS;
+				TargetAttributes = {
+					81FC4B831FBEF0DB0021DBC1 = {
+						CreatedOnToolsVersion = 9.0;
+						ProvisioningStyle = Automatic;
+					};
+					81FC4B9A1FBEF0DB0021DBC1 = {
+						CreatedOnToolsVersion = 9.0;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 81FC4B831FBEF0DB0021DBC1;
+					};
+					81FC4BA51FBEF0DB0021DBC1 = {
+						CreatedOnToolsVersion = 9.0;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 81FC4B831FBEF0DB0021DBC1;
+					};
+				};
+			};
+			buildConfigurationList = 81FC4B7F1FBEF0DA0021DBC1 /* Build configuration list for PBXProject "HappyGrahak" */;
+			compatibilityVersion = "Xcode 8.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 81FC4B7B1FBEF0DA0021DBC1;
+			productRefGroup = 81FC4B851FBEF0DB0021DBC1 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				81FC4B831FBEF0DB0021DBC1 /* HappyGrahak */,
+				81FC4B9A1FBEF0DB0021DBC1 /* HappyGrahakTests */,
+				81FC4BA51FBEF0DB0021DBC1 /* HappyGrahakUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		81FC4B821FBEF0DB0021DBC1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				81FC4B951FBEF0DB0021DBC1 /* LaunchScreen.storyboard in Resources */,
+				81FC4B921FBEF0DB0021DBC1 /* Assets.xcassets in Resources */,
+				81FC4B8D1FBEF0DB0021DBC1 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		81FC4B991FBEF0DB0021DBC1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		81FC4BA41FBEF0DB0021DBC1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		81FC4B801FBEF0DB0021DBC1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				81FC4B8A1FBEF0DB0021DBC1 /* ViewController.swift in Sources */,
+				81FC4B881FBEF0DB0021DBC1 /* AppDelegate.swift in Sources */,
+				81FC4B901FBEF0DB0021DBC1 /* HappyGrahak.xcdatamodeld in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		81FC4B971FBEF0DB0021DBC1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				81FC4BA01FBEF0DB0021DBC1 /* HappyGrahakTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		81FC4BA21FBEF0DB0021DBC1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				81FC4BAB1FBEF0DB0021DBC1 /* HappyGrahakUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		81FC4B9D1FBEF0DB0021DBC1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 81FC4B831FBEF0DB0021DBC1 /* HappyGrahak */;
+			targetProxy = 81FC4B9C1FBEF0DB0021DBC1 /* PBXContainerItemProxy */;
+		};
+		81FC4BA81FBEF0DB0021DBC1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 81FC4B831FBEF0DB0021DBC1 /* HappyGrahak */;
+			targetProxy = 81FC4BA71FBEF0DB0021DBC1 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		81FC4B8B1FBEF0DB0021DBC1 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				81FC4B8C1FBEF0DB0021DBC1 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		81FC4B931FBEF0DB0021DBC1 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				81FC4B941FBEF0DB0021DBC1 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		81FC4BAD1FBEF0DB0021DBC1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		81FC4BAE1FBEF0DB0021DBC1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		81FC4BB01FBEF0DB0021DBC1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = HappyGrahak/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = HappyPesa.HappyGrahak;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		81FC4BB11FBEF0DB0021DBC1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = HappyGrahak/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = HappyPesa.HappyGrahak;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		81FC4BB31FBEF0DB0021DBC1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = HappyGrahakTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = HappyPesa.HappyGrahakTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HappyGrahak.app/HappyGrahak";
+			};
+			name = Debug;
+		};
+		81FC4BB41FBEF0DB0021DBC1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = HappyGrahakTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = HappyPesa.HappyGrahakTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HappyGrahak.app/HappyGrahak";
+			};
+			name = Release;
+		};
+		81FC4BB61FBEF0DB0021DBC1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = HappyGrahakUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = HappyPesa.HappyGrahakUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = HappyGrahak;
+			};
+			name = Debug;
+		};
+		81FC4BB71FBEF0DB0021DBC1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = HappyGrahakUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = HappyPesa.HappyGrahakUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = HappyGrahak;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		81FC4B7F1FBEF0DA0021DBC1 /* Build configuration list for PBXProject "HappyGrahak" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				81FC4BAD1FBEF0DB0021DBC1 /* Debug */,
+				81FC4BAE1FBEF0DB0021DBC1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		81FC4BAF1FBEF0DB0021DBC1 /* Build configuration list for PBXNativeTarget "HappyGrahak" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				81FC4BB01FBEF0DB0021DBC1 /* Debug */,
+				81FC4BB11FBEF0DB0021DBC1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		81FC4BB21FBEF0DB0021DBC1 /* Build configuration list for PBXNativeTarget "HappyGrahakTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				81FC4BB31FBEF0DB0021DBC1 /* Debug */,
+				81FC4BB41FBEF0DB0021DBC1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		81FC4BB51FBEF0DB0021DBC1 /* Build configuration list for PBXNativeTarget "HappyGrahakUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				81FC4BB61FBEF0DB0021DBC1 /* Debug */,
+				81FC4BB71FBEF0DB0021DBC1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		81FC4B8E1FBEF0DB0021DBC1 /* HappyGrahak.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				81FC4B8F1FBEF0DB0021DBC1 /* HappyGrahak.xcdatamodel */,
+			);
+			currentVersion = 81FC4B8F1FBEF0DB0021DBC1 /* HappyGrahak.xcdatamodel */;
+			path = HappyGrahak.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 81FC4B7C1FBEF0DA0021DBC1 /* Project object */;
+}
