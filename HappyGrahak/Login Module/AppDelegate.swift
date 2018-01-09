@@ -13,10 +13,25 @@ import CoreData
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
-
+    var users: UserDetailsModel?
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+//        let defaults = UserDefaults.standard
+//        if (UserDefaults.standard.value(forKey:"userId") != nil) {
+//           let viewController = SideBarRootViewController(nibName: "SideBarRootViewController_iPhone", bundle: nil)
+//
+//            [self.navigationController pushViewController:signUpVC animated:YES];
+////            let navController = UINavigationController.init(rootViewController: viewController)
+////            navController.navigationBar.barTintColor = UIColor.init(red: 23.0/255.0, green: 39.0/255.0, blue: 86.0/255.0, alpha: 1)
+//            self.window?.rootViewController = navController
+//        }else{
+//            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+//
+//            let nextViewController = storyBoard.instantiateViewController(withIdentifier: "ViewController") as! ViewController
+//            let navController = UINavigationController.init(rootViewController: nextViewController)
+//            navController.navigationBar.barTintColor = UIColor.init(red: 23.0/255.0, green: 39.0/255.0, blue: 86.0/255.0, alpha: 1)
+//            self.window?.rootViewController = navController
+//        }
         return true
     }
 

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="60" id="KGk-i7-Jjw" customClass="BlankTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="59.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default_profile_icon" translatesAutoresizingMaskIntoConstraints="NO" id="Fkc-tc-V9M">
+                        <rect key="frame" x="8" y="8" width="44" height="44"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="Fkc-tc-V9M" secondAttribute="height" multiplier="1:1" id="o4U-Ar-pp5"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b7v-lf-9zq">
+                        <rect key="frame" x="60" y="8" width="252" height="18"/>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mobile" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Um5-2F-oG9">
+                        <rect key="frame" x="60" y="30" width="252" height="15"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <color key="backgroundColor" red="0.066666666669999999" green="0.41568627450000001" blue="0.58039215690000001" alpha="1" colorSpace="calibratedRGB"/>
+                <constraints>
+                    <constraint firstItem="b7v-lf-9zq" firstAttribute="leading" secondItem="Fkc-tc-V9M" secondAttribute="trailing" constant="8" id="3Al-fc-Le5"/>
+                    <constraint firstItem="Fkc-tc-V9M" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="GcY-hL-ZXv"/>
+                    <constraint firstAttribute="bottom" secondItem="Um5-2F-oG9" secondAttribute="bottom" constant="14.5" id="PcN-z9-Kez"/>
+                    <constraint firstItem="Um5-2F-oG9" firstAttribute="leading" secondItem="Fkc-tc-V9M" secondAttribute="trailing" constant="8" id="SrZ-lr-5Az"/>
+                    <constraint firstItem="Um5-2F-oG9" firstAttribute="top" secondItem="b7v-lf-9zq" secondAttribute="bottom" constant="4" id="XwO-67-TJi"/>
+                    <constraint firstItem="b7v-lf-9zq" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="Y1i-So-ile"/>
+                    <constraint firstItem="Fkc-tc-V9M" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="YNR-Ww-eSR"/>
+                    <constraint firstItem="Um5-2F-oG9" firstAttribute="height" secondItem="b7v-lf-9zq" secondAttribute="height" constant="-3" id="cJW-uR-Ro7"/>
+                    <constraint firstAttribute="bottom" secondItem="Fkc-tc-V9M" secondAttribute="bottom" constant="7.5" id="e2s-cy-exq"/>
+                    <constraint firstAttribute="trailing" secondItem="Um5-2F-oG9" secondAttribute="trailing" constant="8" id="j07-bb-l7v"/>
+                    <constraint firstAttribute="trailing" secondItem="b7v-lf-9zq" secondAttribute="trailing" constant="8" id="tma-hU-Oqe"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
+            <connections>
+                <outlet property="userMobile" destination="Um5-2F-oG9" id="jvx-KU-7oQ"/>
+                <outlet property="userName" destination="b7v-lf-9zq" id="cyU-rN-aCc"/>
+                <outlet property="userProfile" destination="Fkc-tc-V9M" id="4PC-Qf-htg"/>
+            </connections>
+            <point key="canvasLocation" x="26" y="60"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="default_profile_icon" width="12" height="12"/>
+    </resources>
+</document>
