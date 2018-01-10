@@ -17,9 +17,11 @@
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>1.0</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>want to make profile picture</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>harabara mais demo.otf</string>
@@ -43,7 +45,5 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-	<key>NSCameraUsageDescription</key>
-	<string>want to make profile picture</string>
 </dict>
 </plist>

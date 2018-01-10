@@ -18,6 +18,7 @@ class OTPViewController: UIViewController, UITextFieldDelegate{
     var password: String?
     var referId: String?
     var cPassword: String?
+    var checked: Bool?
     var flag: Bool?
     
     var countdownTimer: Timer!
@@ -245,7 +246,7 @@ class OTPViewController: UIViewController, UITextFieldDelegate{
         //APP_DELEGATE.showHud(view: self.view)
         let params: String
         
-        params =  "mobile=\(mobile!)&password=\(password!)&otp=\(otpTextField.text!)"
+        params =  "mobile=\(mobile!)&password=\(password!)&otp=\(otpTextField.text!)&accept=true"
         
         let urlString = BASE_URL + "register/verify?" + params
         print(urlString)

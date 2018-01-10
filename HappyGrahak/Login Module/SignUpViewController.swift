@@ -17,6 +17,19 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet var password: UITextField!
     @IBOutlet var referralField: UITextField!
     @IBOutlet var signUpBtn: UIButton!
+    @IBOutlet var acceptBtn: UIButton!
+    let checkedImage = UIImage(named: "check_icon")! as UIImage
+    let uncheckedImage = UIImage(named: "uncheck_icon")! as UIImage
+    var isChecked: Bool = false {
+        didSet{
+            if isChecked == true {
+                self.acceptBtn.setImage(checkedImage, for: UIControlState.normal)
+            } else {
+                self.acceptBtn.setImage(uncheckedImage, for: UIControlState.normal)
+            }
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -26,6 +39,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        isChecked = false
         scroll.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
         mobileField.delegate = self
         password.delegate = self
@@ -50,8 +64,17 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         self.navigationItem.title = "Sign Up"
         self.navigationController!.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white, NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 18.0)]
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
-        
         scroll.addGestureRecognizer(tap)
+        
+        self.acceptBtn.addTarget(self, action: #selector(checkClicked), for: .touchUpInside)
+    }
+    
+    @objc func checkClicked() {
+        if isChecked {
+            isChecked = false
+        }else{
+            isChecked = true
+        }
     }
     
     @objc func dismissKeyboard() {
@@ -105,7 +128,11 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
                         if ((mobileField.text!.characters.count)>0){
                             if ((mobileField.text!.characters.count)==10){
                                 if ((password.text!.characters.count)>0){
-                                    self.getImmovableAssetInfo()
+                                    if isChecked{
+                                        self.getImmovableAssetInfo()
+                                    } else {
+                                        self.alertViewPopup("Accept Conditions", "Please accept terms and conditions")
+                                    }
                                 }else{
                                     self.alertViewPopup("Empty Field", "Please enter Password")
                                 }
@@ -131,7 +158,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
 
         let params: String
         
-        params =  "mobile=\(mobileField.text!)&password=\(password.text!)&refer_id=\(referralField.text!)"
+        params =  "mobile=\(mobileField.text!)&password=\(password.text!)&refer_id=\(referralField.text!)&accept=\(isChecked)"
         
         let urlString = BASE_URL + "register?" + params
         print(urlString)
@@ -172,16 +199,17 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
                                 nextViewController.password = self.password.text
                                 nextViewController.referId = self.referralField.text
                                 nextViewController.flag = false
+                                nextViewController.checked = self.isChecked
                                 self.navigationController?.pushViewController(nextViewController, animated: true)
                             }else if ((error!)){
-                                let alert = UIAlertController(title: "Already Registered", message: message?[0] as? String, preferredStyle:  UIAlertControllerStyle.alert)
+                                let alert = UIAlertController(title: "HAPPY GRAHAK", message: message?[0] as? String, preferredStyle:  UIAlertControllerStyle.alert)
                                 
                                 let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) {
                                     UIAlertAction in
-                                    let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-                                    
-                                    let nextViewController = storyBoard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
-                                    self.navigationController?.pushViewController(nextViewController, animated: true)
+//                                    let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+//
+//                                    let nextViewController = storyBoard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+//                                    self.navigationController?.pushViewController(nextViewController, animated: true)
                                 }
                                 // add an action (button)
                                 alert.addAction(okAction)

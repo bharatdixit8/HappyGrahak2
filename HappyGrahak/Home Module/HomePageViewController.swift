@@ -15,6 +15,7 @@ import CoreData
 
 class HomePageViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
   
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet var homeTableView: UITableView!
     var cell1: CategoryTableViewCell?
     var cell2: StaticBannerTableViewCell?
@@ -348,7 +349,8 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        activityIndicator.startAnimating()
+//        spinner?.startAnimating()
         //self.navigationItem.setHidesBackButton(true, animated: false)
         // Do any additional setup after loading the view.
     }
@@ -509,6 +511,7 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
                                 }
                                 
                                 self.getSubCategory()
+                                self.activityIndicator.stopAnimating()
                             }else{
                             }
                         }

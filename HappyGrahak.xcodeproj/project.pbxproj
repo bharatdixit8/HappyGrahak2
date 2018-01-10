@@ -474,6 +474,7 @@
 		B2405B4620048D5F0044551A /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		B2405C76200491B00044551A /* WishListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WishListViewController.swift; path = HappyGrahak/WishListViewController.swift; sourceTree = SOURCE_ROOT; };
 		B2405C77200491B00044551A /* WishListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = WishListViewController.xib; path = HappyGrahak/WishListViewController.xib; sourceTree = SOURCE_ROOT; };
+		B2F0D9042004C24E0034DCCA /* HappyGrahak.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HappyGrahak.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -527,6 +528,7 @@
 		81FC4B861FBEF0DB0021DBC1 /* HappyGrahak */ = {
 			isa = PBXGroup;
 			children = (
+				B2F0D9042004C24E0034DCCA /* HappyGrahak.entitlements */,
 				B2405B0420048D5F0044551A /* Build Order Module */,
 				B2405B1120048D5F0044551A /* Home Module */,
 				B2405AF220048D5F0044551A /* LatoFont */,
@@ -837,6 +839,14 @@
 						CreatedOnToolsVersion = 9.0;
 						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 					81FC4B9A1FBEF0DB0021DBC1 = {
 						CreatedOnToolsVersion = 9.0;
@@ -1380,6 +1390,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = HappyGrahak/HappyGrahak.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 9KF53P4B99;
@@ -1405,6 +1416,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = HappyGrahak/HappyGrahak.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 9KF53P4B99;
