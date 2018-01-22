@@ -15,10 +15,10 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="150"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="149.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="150"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="banner2" translatesAutoresizingMaskIntoConstraints="NO" id="dk5-KN-HEe">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dk5-KN-HEe">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="150"/>
                     </imageView>
                 </subviews>
@@ -30,10 +30,10 @@
                 <constraint firstItem="dk5-KN-HEe" firstAttribute="leading" secondItem="njF-e1-oar" secondAttribute="leading" id="sTH-bN-unH"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="imgView" destination="dk5-KN-HEe" id="vaV-H2-BAK"/>
+            </connections>
             <point key="canvasLocation" x="34" y="107"/>
         </tableViewCell>
     </objects>
-    <resources>
-        <image name="banner2" width="360" height="128"/>
-    </resources>
 </document>

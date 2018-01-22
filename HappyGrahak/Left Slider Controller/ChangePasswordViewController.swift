@@ -40,7 +40,7 @@ class ChangePasswordViewController: UIViewController, UITextFieldDelegate, UITex
         self.navigationController?.navigationBar.addSubview(button1!)
         self.navigationItem.title = "Change Password"
         self.navigationItem.hidesBackButton = true
-        self.navigationController!.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white, NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 18.0)]
+        self.navigationController!.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.black, NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 18.0)]
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
         
         scroller.addGestureRecognizer(tap)

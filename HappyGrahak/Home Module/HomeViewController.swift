@@ -14,33 +14,15 @@ class HomeViewController: UITabBarController {
     var userDetails: UserDetailsModel?
     var button2: UIImageView?
     var button3: UILabel?
-    
+    var button5: UIImageView?
+    var button6: UILabel?
     let navigationNormalHeight: CGFloat = 44
     let navigationExtendHeight: CGFloat = 84
-    
+    let recentViewArray: NSMutableArray = NSMutableArray()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        let button1 = UIButton.init(type: .custom)
-//        button1.setImage(UIImage.init(named: "left_menu_icon"), for: UIControlState.normal)
-//        button1.frame = CGRect.init(x: 0, y: 0, width: 40, height: 40)
-//        //button1.addTarget(self, action:#selector(self.openMenu), for:.touchUpInside)
-//        let barButton1 = UIBarButtonItem.init(customView: button1)
-//        let button2 = UIImageView.init(image: UIImage.init(named: "home_logo_icon"))
-//        //button2.setImage(UIImage.init(named: "home_logo_icon"), for: UIControlState.normal)
-//        button2.frame = CGRect.init(x: 100, y: 0, width: 100, height: 25)
-//        //button2.addTarget(self, action:#selector(self.backAction), for:.touchUpInside)
-//        let barButton2 = UIBarButtonItem.init(customView: button2)
-//        self.navigationItem.leftBarButtonItems = [barButton1, barButton2]
-        
-        
-//        let button3 = UIButton.init(type: .custom)
-//        button3.setImage(UIImage.init(named: "right_menu_icon"), for: UIControlState.normal)
-//        button3.frame = CGRect.init(x: 0, y: 0, width: 20, height: 40)
-//        //button3.addTarget(self, action:#selector(self.moveToCart), for:.touchUpInside)
-//        let barButton3 = UIBarButtonItem.init(customView: button3)
-//
-        //116a94
+        UserDefaults.standard.set(self.recentViewArray, forKey: "recentView")
         let button4 = UIButton.init(type: .custom)
         button4.setImage(UIImage.init(named: "cart_icon"), for: UIControlState.normal)
         button4.frame = CGRect.init(x: (self.navigationController?.navigationBar.frame.size.width)!-60, y: 8, width: 25, height: 25)
@@ -69,9 +51,9 @@ class HomeViewController: UITabBarController {
         self.navigationController?.navigationBar.addSubview(button4)
         self.navigationController?.navigationBar.addSubview(button3!)
 //        self.navigationItem.rightBarButtonItems = [barButton3, barButton4]
-        self.navigationController?.navigationBar.topItem?.leftBarButtonItem?.tintColor = UIColor.white
+        self.navigationController?.navigationBar.topItem?.leftBarButtonItem?.tintColor = UIColor.black
         self.navigationController?.navigationBar.topItem?.rightBarButtonItem?.tintColor = UIColor.white
-        self.navigationController?.navigationBar.barTintColor = UIColor.init(red: 17.0/255.0, green: 106.0/255.0, blue: 148.0/255.0, alpha: 1)
+//        self.navigationController?.navigationBar.barTintColor = UIColor.init(red: 17.0/255.0, green: 106.0/255.0, blue: 148.0/255.0, alpha: 1)
         self.navigationController!.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white, NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 18.0)]
         let defaults = UserDefaults.standard
         defaults.set(userDetails?.name, forKey: "name")
@@ -83,12 +65,26 @@ class HomeViewController: UITabBarController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-//        if #available(iOS 11.0, *) {
-//            self.additionalSafeAreaInsets.top = 20
-//        }
+
         button2 = UIImageView.init(image: UIImage.init(named: "home_logo_icon"))
-        button2?.frame = CGRect.init(x: 50, y: 8, width: 120, height: 27.5)
+        button2?.frame = CGRect.init(x: 50, y: 13, width: 150, height: 20.5)
         self.navigationController?.navigationBar .addSubview(button2!)
+        
+        button5 = UIImageView.init(image: UIImage.init(named: "notification_icon"))
+        button5?.frame = CGRect.init(x: (self.navigationController?.navigationBar.frame.size.width)!-100, y: 8, width: 24, height: 24)
+        self.navigationController?.navigationBar .addSubview(button5!)
+        
+        button6 = UILabel.init(frame: CGRect(x: (self.navigationController?.navigationBar.frame.size.width)!-95, y: 4.0, width: 13, height: 13))
+        button6?.backgroundColor = UIColor.red
+        button6?.layer.cornerRadius = (button6?.frame.size.height)!/2
+        button6?.clipsToBounds = true
+        button6?.textColor = UIColor.white
+        button6?.font = UIFont.boldSystemFont(ofSize: 8.0)
+        button6?.tag = 101
+        button6?.textAlignment = .center
+        button6?.text = "0"
+        self.navigationController?.navigationBar.addSubview(button6!)
+        
         if(UserDefaults.standard.value(forKey:"userId") != nil){
             self.sendToken(_token: (UserDefaults.standard.value(forKey:"token") as! String))
         } else {

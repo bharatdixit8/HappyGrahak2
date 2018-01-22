@@ -9,11 +9,22 @@
 import UIKit
 import CoreData
 
-class ProductDetailsViewController: UIViewController, UIScrollViewDelegate, UITableViewDelegate, UITableViewDataSource {
+extension String{
+    func convertHtml() -> NSAttributedString{
+        guard let data = data(using: .utf8) else { return NSAttributedString() }
+        do{
+            return try NSAttributedString(data: data, options: [.documentType: NSAttributedString.DocumentType.html, .characterEncoding: String.Encoding.utf8.rawValue], documentAttributes: nil)
+        }catch{
+            return NSAttributedString()
+        }
+    }
+}
 
+class ProductDetailsViewController: UIViewController, UIScrollViewDelegate, UITableViewDelegate, UITableViewDataSource {
+    
     @IBOutlet var offerLabel: UILabel!
     var productId: Int = 0
-    var invId: Int?
+    var invId: Int = 0
     
     var offer: String = ""
     var mrp: String = ""
@@ -26,11 +37,21 @@ class ProductDetailsViewController: UIViewController, UIScrollViewDelegate, UITa
     var invIdArray: NSArray?
     var spArray: NSArray?
     var offerArray: NSArray?
+    var invtArray: NSArray?
+    var outerImageArray: NSMutableArray = NSMutableArray()
+    
+    var weightArray1 = NSMutableArray()
+    var mrpArray1 = NSMutableArray()
+    var spArray1 = NSMutableArray()
+    var offerArray1 = NSMutableArray()
+    var inventIdArray1 = NSMutableArray()
+    
     var myView: UIView?
     var tableView: UITableView?
     
     var label: UILabel?
     var imgPathArray: NSMutableArray = NSMutableArray()
+    var recentProductArray: NSMutableArray = NSMutableArray()
     var button1: UIButton?
     var myCarts: [MyCart] = []
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
@@ -44,14 +65,29 @@ class ProductDetailsViewController: UIViewController, UIScrollViewDelegate, UITa
     @IBOutlet var addCartBtn: UIButton!
     @IBOutlet var dropBtn: UIButton!
     @IBOutlet var wishlistBtn: UIButton!
+    @IBOutlet var activityIndicator: UIActivityIndicatorView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         // Do any additional setup after loading the view.
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        let recentViewArray = UserDefaults.standard.value(forKey: "recentView") as! NSArray
+        print(recentViewArray)
+        if recentViewArray.contains(productId) {} else {
+            for data in recentViewArray{
+                self.recentProductArray.add(data)
+            }
+            self.recentProductArray.add(self.productId)
+            print(self.recentProductArray)
+            UserDefaults.standard.set(self.recentProductArray, forKey: "recentView")
+            print(UserDefaults.standard.value(forKey: "recentView"))
+            print(UserDefaults.standard.object(forKey: "recentView"))
+            UserDefaults.standard.synchronize()
+        }
+        self.activityIndicator.isHidden = false
+        self.activityIndicator.startAnimating()
         let singleTap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
         singleTap.cancelsTouchesInView = false
         singleTap.numberOfTapsRequired = 1
@@ -67,14 +103,13 @@ class ProductDetailsViewController: UIViewController, UIScrollViewDelegate, UITa
         label?.numberOfLines = 0
         label?.font = UIFont.boldSystemFont(ofSize: 14.0)
         label?.textAlignment = .center
-        label?.textColor = UIColor.white
+        label?.textColor = UIColor.black
         self.navigationItem.titleView = label!
         //
         if (UserDefaults.standard.value(forKey:"userId") == nil) {
             self.wishlistBtn.isHidden = true
         }
-        addCartBtn.layer.cornerRadius = addCartBtn.frame.size.height/2
-        self.addTableView()
+        //addCartBtn.layer.cornerRadius = addCartBtn.frame.size.height/2
         dropBtn.layer.borderWidth = 1.0
         dropBtn.layer.borderColor = UIColor.black.cgColor
         dropBtn.setTitleColor(UIColor.black, for: .normal)
@@ -96,6 +131,8 @@ class ProductDetailsViewController: UIViewController, UIScrollViewDelegate, UITa
     }
     
     @objc func addWishlistOnline(sender: UIButton) {
+        self.activityIndicator.isHidden = false
+        self.activityIndicator.startAnimating()
         let params: String
         
         params =  "product_id=\(productId)&envt_id=\(dropBtn.tag)"
@@ -142,6 +179,8 @@ class ProductDetailsViewController: UIViewController, UIScrollViewDelegate, UITa
                             //print("Data:- \(data!)")
                             if (!(error!)){
                                 sender.setImage(UIImage(named: "selected_wishlist"), for: .normal)
+                                self.activityIndicator.stopAnimating()
+                                self.activityIndicator.isHidden = true
                             }else{
                             }
                         }
@@ -197,7 +236,7 @@ class ProductDetailsViewController: UIViewController, UIScrollViewDelegate, UITa
     }
     
     func addTableView() -> Void {
-        myView = UIView.init(frame: CGRect(x: dropBtn.frame.origin.x, y: dropBtn.frame.origin.y+44.0, width: dropBtn.frame.size.width, height: CGFloat((quantityArray?.count)!*30)))
+        myView = UIView.init(frame: CGRect(x: dropBtn.frame.origin.x, y: dropBtn.frame.origin.y+44.0, width: dropBtn.frame.size.width, height: CGFloat((self.weightArray1.count)*30)))
         myView?.layer.shadowOffset = CGSize(width: 0, height: 0)
         myView?.layer.shadowColor = UIColor.black.cgColor
         myView?.backgroundColor = UIColor.white
@@ -229,7 +268,7 @@ class ProductDetailsViewController: UIViewController, UIScrollViewDelegate, UITa
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return (quantityArray?.count)!
+        return (self.weightArray1.count)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -239,7 +278,7 @@ class ProductDetailsViewController: UIViewController, UIScrollViewDelegate, UITa
             cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "cellID")
         }
         
-        cell?.textLabel?.text = quantityArray?[indexPath.row] as! String
+        cell?.textLabel?.text = self.weightArray1[indexPath.row] as! String
         cell?.textLabel?.font =  UIFont(name:"Times New Roman", size: 10)
         cell?.textLabel?.textAlignment = .left
         return cell!
@@ -252,12 +291,32 @@ class ProductDetailsViewController: UIViewController, UIScrollViewDelegate, UITa
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell:UITableViewCell? = tableView.cellForRow(at: indexPath)
         dropBtn.setTitle(" " + (cell?.textLabel?.text)!, for: .normal)
-        dropBtn.tag = invIdArray![indexPath.row] as! Int
-        let attributeString: NSMutableAttributedString =  NSMutableAttributedString(string: mrpArray?[indexPath.row] as! String)
+        dropBtn.tag = self.inventIdArray1[indexPath.row] as! Int
+        let attributeString: NSMutableAttributedString =  NSMutableAttributedString(string: self.mrpArray1[indexPath.row] as! String)
         attributeString.addAttribute(NSAttributedStringKey.strikethroughStyle, value: 2, range: NSMakeRange(0, attributeString.length))
         self.mrpLabel.attributedText = attributeString
-        self.pricceLabel.text = spArray?[indexPath.row] as! String
-        self.offerLabel.text = offerArray?[indexPath.row] as! String
+        self.pricceLabel.text = self.spArray1[indexPath.row] as! String
+        self.offerLabel.text = self.offerArray1[indexPath.row] as! String
+        
+        var Y: CGFloat = self.scrollview.frame.size.width/2-self.scrollview.frame.size.height/2
+        
+        for index in 0..<(self.outerImageArray[indexPath.row] as! NSArray).count {
+            let url = URL(string: (self.outerImageArray[indexPath.row] as! NSArray)[index] as! String)
+            let data = try? Data(contentsOf: url!)
+            let image = UIImage(data: data!)
+            var imageView = UIImageView(frame: CGRect(x: Y, y: 0, width: self.scrollview.frame.size.height, height: self.scrollview.frame.size.height))
+            imageView.image = UIImage(data: data!)
+            imageView.layer.borderWidth=1.0
+            imageView.layer.masksToBounds = true
+            imageView.layer.borderColor = UIColor.white.cgColor
+            //imageView.layer.cornerRadius = 50;// Corner radius should be half of the height and width.
+            
+            self.scrollview.addSubview(imageView)
+            Y=self.scrollview.frame.size.width+Y
+        }
+        self.scrollview.contentSize = CGSize(width: Y, height: self.scrollview.frame.size.height)
+        self.configurePageControl()
+        
         self.myView?.isHidden = true
     }
 
@@ -298,9 +357,10 @@ class ProductDetailsViewController: UIViewController, UIScrollViewDelegate, UITa
                             var error: Bool?
                             var message: NSArray?
                             var productName: String?
-//                            var mrpArray: NSMutableArray?
-//                            var spArray: NSMutableArray?
-//                            var offerArray: NSMutableArray?
+                            self.mrpArray1 = NSMutableArray()
+                            self.spArray1 = NSMutableArray()
+                            self.offerArray1 = NSMutableArray()
+                            self.inventIdArray1 = NSMutableArray()
                             var  data: NSDictionary?
                             
                             error = result["error"] as? Bool
@@ -310,32 +370,67 @@ class ProductDetailsViewController: UIViewController, UIScrollViewDelegate, UITa
                             print("Message:- \(message!)")
                             print("Data:- \(data!)")
                             if (!(error!)){
+                                //let h2t = CkoHtmlToText()
                                 productName = data?["name"] as! String
-                                self.descLabel.text = data?["description"] as! String
+                                self.invtArray = data?["inventry"] as! NSArray
+                                self.descLabel.attributedText = ((data?["detail"] as! NSDictionary)["description"] as! String).convertHtml()
                                 self.nameLabel.text = productName
                                 self.label?.text = productName
-                                self.offerLabel.text = self.offer
-                                let attributeString: NSMutableAttributedString =  NSMutableAttributedString(string: self.mrp)
-                                attributeString.addAttribute(NSAttributedStringKey.strikethroughStyle, value: 2, range: NSMakeRange(0, attributeString.length))
-                                self.mrpLabel.attributedText = attributeString
-                                self.pricceLabel.text = self.price
-                                self.dropBtn.tag = self.invId!
-                                self.dropBtn.setTitle(" " + self.quantity, for: .normal)
-                                self.imgArray = data?["images"] as? NSArray
                                 
-                                for i in self.imgArray! {
-                                    let imgDict = i as! NSDictionary
-                                    self.imgPathArray.add(imgDict["path"])
+                                self.outerImageArray = NSMutableArray()
+                                for i in self.invtArray! {
+                                    let object = i as! NSDictionary
+                                    self.inventIdArray1.add(object.value(forKey: "id"))
+                                    let imageArray = object.value(forKey: "images") as! NSArray
+                                    var interImageArray: NSMutableArray = NSMutableArray()
+                                    for j in imageArray {
+                                        let imgObject = j as! NSDictionary
+                                        interImageArray.add(imgObject.value(forKey: "image"))
+                                    }
+                                    self.outerImageArray.add(interImageArray)
+                                    
+                                    let weightQuantity = object.value(forKey: "qty_weight") as! String
+                                    let weightUnitDict = object.value(forKey: "unit") as! NSDictionary
+                                    let weightUnit = weightUnitDict.value(forKey: "symb") as! String
+                                    
+                                    let weightString = weightQuantity + " " + weightUnit
+                                    
+                                    let mrp = object.value(forKey: "mrp") as! String
+                                    self.mrpArray1.add("\u{20B9} " + mrp)
+                                    
+                                    let sp = object.value(forKey: "sell_price") as! String
+                                    self.spArray1.add("\u{20B9} " + sp)
+                                    
+                                    if let offer = (object.value(forKey: "offer_precentage") as? String)
+                                    {
+                                        self.offerArray1.add(offer + " %")
+                                    }
+                                    else
+                                    {
+                                        self.offerArray1.add("null %")
+                                    }
+                                    
+                                    self.weightArray1.add(weightString)
+                                    
                                 }
-                                print(self.imgPathArray)
+                            
+                                print(self.outerImageArray)
                                 var Y: CGFloat = self.scrollview.frame.size.width/2-self.scrollview.frame.size.height/2
                                 
-                                for index in 0..<self.imgPathArray.count {
-                                    let url = URL(string: self.imgPathArray[index] as! String)
-                                    let data = try? Data(contentsOf: url!)
-                                    let image = UIImage(data: data!)
+                                for index in 0..<(self.outerImageArray[0] as! NSArray).count {
+                                    let url = URL(string: (self.outerImageArray[0] as! NSArray)[index] as! String)
+                                    var data: Data?
+                                    var image: UIImage?
+                                    if url != nil {
+                                        data = try? Data(contentsOf: url!)
+                                    }
+                                    if data != nil{
+                                        image = UIImage(data: data!)
+                                    }else{
+                                        image = UIImage(named: "default_product_icon")
+                                    }
                                     var imageView = UIImageView(frame: CGRect(x: Y, y: 0, width: self.scrollview.frame.size.height, height: self.scrollview.frame.size.height))
-                                    imageView.image = UIImage(data: data!)
+                                    imageView.image = image
                                     imageView.layer.borderWidth=1.0
                                     imageView.layer.masksToBounds = true
                                     imageView.layer.borderColor = UIColor.white.cgColor
@@ -346,7 +441,22 @@ class ProductDetailsViewController: UIViewController, UIScrollViewDelegate, UITa
                                 }
                                 self.scrollview.contentSize = CGSize(width: Y, height: self.scrollview.frame.size.height)
                                 self.configurePageControl()
-                                //print(productName)
+                                
+                                if self.offerArray1[0] as! String == "0 %" {
+                                    self.offerLabel.isHidden = true
+                                }else{
+                                    self.offerLabel.text = self.offerArray1[0] as! String
+                                }
+                                
+                                let attributeString: NSMutableAttributedString =  NSMutableAttributedString(string: self.mrpArray1[0] as! String)
+                                attributeString.addAttribute(NSAttributedStringKey.strikethroughStyle, value: 2, range: NSMakeRange(0, attributeString.length))
+                                self.mrpLabel.attributedText = attributeString
+                                self.pricceLabel.text = self.spArray1[0] as! String
+                                self.dropBtn.tag = self.inventIdArray1[0] as! Int
+                                self.dropBtn.setTitle(" " + (self.weightArray1[0] as! String), for: .normal)
+                                self.addTableView()
+                                self.activityIndicator.stopAnimating()
+                                self.activityIndicator.isHidden = true
                             }else{
                             }
                         }
@@ -403,7 +513,7 @@ class ProductDetailsViewController: UIViewController, UIScrollViewDelegate, UITa
             if intvtIdArray.contains(dropBtn.tag){
                 let valueIndex = intvtIdArray.index(of: dropBtn.tag)
                 let quantity: Int = (productQuantityArray.object(at: valueIndex) as! NSString).integerValue
-                let cells: ProductListTableViewCell = sender.superview?.superview as! ProductListTableViewCell
+                //let cells: ProductListTableViewCell = sender.superview?.superview as! ProductListTableViewCell
                 updateCartId = cartIdArray.object(at: valueIndex) as! Int
                 
                 let request: NSFetchRequest<MyCart> = MyCart.fetchRequest()
@@ -432,7 +542,7 @@ class ProductDetailsViewController: UIViewController, UIScrollViewDelegate, UITa
                 myCart.invt_id = Int16(dropBtn.tag)
                 
                 myCart.productName = nameLabel.text!
-                myCart.imgPath = imagePath
+                myCart.imgPath = ((self.outerImageArray[0] as! NSArray)[0] as! String)
                 myCart.unit = (dropBtn.titleLabel?.text)!
                 myCart.quantity = "1"
                 myCart.price = pricceLabel.text!
@@ -445,7 +555,7 @@ class ProductDetailsViewController: UIViewController, UIScrollViewDelegate, UITa
             myCart.invt_id = Int16(dropBtn.tag)
             
             myCart.productName = nameLabel.text!
-            myCart.imgPath = imagePath
+            myCart.imgPath = ((self.outerImageArray[0] as! NSArray)[0] as! String)
             myCart.unit = (dropBtn.titleLabel?.text)!
             myCart.quantity = "1"
             myCart.price = pricceLabel.text!
@@ -461,9 +571,14 @@ class ProductDetailsViewController: UIViewController, UIScrollViewDelegate, UITa
         //        print(viewArray)
         let label: UILabel = self.navigationController?.navigationBar.viewWithTag(1001) as! UILabel
         label.text = String(describing: count)
+        
+        self.activityIndicator.stopAnimating()
+        self.activityIndicator.isHidden = true
     }
     
     @objc func addToCart(sender: UIButton){
+        self.activityIndicator.isHidden = false
+        self.activityIndicator.startAnimating()
         self.myView?.isHidden = true
         if (UserDefaults.standard.value(forKey:"userId") != nil) {
             self.addCartOnline(sender: sender)
@@ -596,15 +711,9 @@ class ProductDetailsViewController: UIViewController, UIScrollViewDelegate, UITa
                                 let count: Int = (UserDefaults.standard.value(forKey:"cartCount") as! Int)
                                 let label: UILabel = self.navigationController?.navigationBar.viewWithTag(1001) as! UILabel
                                 label.text = String(describing: count)
+                                self.activityIndicator.stopAnimating()
+                                self.activityIndicator.isHidden = true
                             }else{
-                                let alert = UIAlertController(title: "Not Registered", message: message?[0] as? String, preferredStyle:  UIAlertControllerStyle.alert)
-                                
-                                let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default)
-                                
-                                alert.addAction(okAction)
-                                
-                                // show the alert
-                                self.present(alert, animated: true, completion: nil)
                             }
                         }
                     }

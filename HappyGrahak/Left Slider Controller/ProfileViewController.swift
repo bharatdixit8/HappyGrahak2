@@ -104,13 +104,13 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         let barButton1 = UIBarButtonItem.init(customView: button1)
         self.navigationItem.leftBarButtonItem = barButton1
         self.navigationItem.title = "My Profile"
-        self.navigationController!.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white, NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 18.0)]
+        self.navigationController!.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.black, NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 18.0)]
         
         profilePic.layer.cornerRadius = profilePic.frame.size.height/2
         profilePic.clipsToBounds = true
         profilePic.layer.borderWidth = 2.0
         profilePic.layer.borderColor = UIColor.white.cgColor
-        profileBtn.addTarget(self, action: #selector(self.uploadImageBtn(sender:)), for: .touchUpInside)
+        //profileBtn.addTarget(self, action: #selector(self.uploadImageBtn(sender:)), for: .touchUpInside)
         //        stateBtn.addTarget(self, action: #selector(self.addTableView), for: .touchUpInside)
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
         picker?.delegate=self
@@ -463,7 +463,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
                                 }
                                 let state = data!["state"] as? NSDictionary
                                 let city = data!["city"] as? NSDictionary
-                                //userName = data?.value(forKey: "name") as! String
+                                userName = data?.value(forKey: "name") as! String
 //                                email = data?.value(forKey: "email") as! String
                                 mobile = data?.value(forKey: "mobile") as! String
                                 countryId = data?.value(forKey: "country_id") as! String
@@ -476,7 +476,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
                                     self.cityField.text = city_name as! String
                                 }
                                 self.nameField.text = userName
-                                self.emailField.text = email
+                                
                                 self.mobileField.text = mobile
                                 
                                 self.getAllStates(countryId: countryId!)

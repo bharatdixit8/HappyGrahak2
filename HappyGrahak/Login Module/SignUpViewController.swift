@@ -50,7 +50,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
                                                                  attributes: [NSAttributedStringKey.foregroundColor: UIColor.white])
         password.attributedPlaceholder = NSAttributedString(string: "Password",
                                                                  attributes: [NSAttributedStringKey.foregroundColor: UIColor.white])
-        referralField.attributedPlaceholder = NSAttributedString(string: "Reffer Id",
+        referralField.attributedPlaceholder = NSAttributedString(string: "Reffer Id(Optional)",
                                                             attributes: [NSAttributedStringKey.foregroundColor: UIColor.white])
         
         signUpBtn .addTarget(self, action: #selector(self.loadSignUp), for: UIControlEvents.touchUpInside)

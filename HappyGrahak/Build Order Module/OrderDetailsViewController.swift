@@ -15,6 +15,8 @@ class OrderDetailsViewController: UIViewController, UITableViewDelegate, UITable
     var imagePathArray: NSMutableArray = NSMutableArray()
     var quantityArray: NSMutableArray = NSMutableArray()
     var priceArray: NSMutableArray = NSMutableArray()
+    var productIdArray: NSMutableArray = NSMutableArray()
+    var inventryIdArray: NSMutableArray = NSMutableArray()
     var address: String?
     var city: String?
     var state: String?
@@ -57,7 +59,7 @@ class OrderDetailsViewController: UIViewController, UITableViewDelegate, UITable
         self.navigationController?.navigationBar.addSubview(button1!)
         self.navigationItem.title = "Order Detail"
         self.navigationItem.hidesBackButton = true
-        self.navigationController!.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white, NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 18.0)]
+        self.navigationController!.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.black, NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 18.0)]
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -85,6 +87,8 @@ class OrderDetailsViewController: UIViewController, UITableViewDelegate, UITable
             tableView.register(UINib(nibName: "ItemListTableViewCell", bundle: nil), forCellReuseIdentifier: identifier)
             cell = tableView.dequeueReusableCell(withIdentifier: identifier) as? ItemListTableViewCell
         }
+        cell.tag = self.productIdArray[indexPath.row] as! Int
+        cell.accessibilityIdentifier = "\(self.inventryIdArray[indexPath.row])"
         self.itemList.separatorStyle = .none
         cell.selectionStyle = .none
         cell.productNameLabel.text=nameArray[indexPath.row] as! String
@@ -101,6 +105,15 @@ class OrderDetailsViewController: UIViewController, UITableViewDelegate, UITable
             cell?.produtImage.image = UIImage(named: "default_product_icon")
         }
         return cell!
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cells = itemList.cellForRow(at: indexPath) as! ItemListTableViewCell
+        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+        let nextViewController = storyBoard.instantiateViewController(withIdentifier: "ProductDetailsViewController") as! ProductDetailsViewController
+        nextViewController.productId = cells.tag
+        nextViewController.invId = (cells.accessibilityIdentifier as! NSString).integerValue
+        self.navigationController?.pushViewController(nextViewController, animated: true)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -147,26 +160,30 @@ class OrderDetailsViewController: UIViewController, UITableViewDelegate, UITable
                             self.imagePathArray = NSMutableArray()
                             self.quantityArray = NSMutableArray()
                             self.priceArray = NSMutableArray()
+                            self.productIdArray = NSMutableArray()
+                            self.inventryIdArray = NSMutableArray()
                             //var unitDict: NSDictionary?
                             var  data: NSDictionary?
                             
                             error = result["error"] as? Bool
                             message = result["msg"] as? NSArray
                             data = result["data"] as? NSDictionary
-                            
+                            print(data)
                             if (!(error!)){
                                 self.cartArray = data?["cart_data"] as! NSArray
                                 self.numberLabel.text = "\(data?["id"] as! Int)"
-                                if data!["status"] as! String=="0" {
+                                if data!["status"] as! String=="3" {
                                     self.statusLabel.text = "Pending"
-                                } else if data!["status"] as! String=="1" {
+                                } else if data!["status"] as! String=="4" {
                                     self.statusLabel.text = "Process"
-                                } else if data!["status"] as! String=="2" {
+                                } else if data!["status"] as! String=="5" {
                                     self.statusLabel.text = "Dispatch"
-                                } else if data!["status"] as! String=="3" {
+                                } else if data!["status"] as! String=="6" {
+                                    self.statusLabel.text = "Out For Delivery"
+                                } else if data!["status"] as! String=="7" {
                                     self.statusLabel.text = "Delivered"
-                                } else {
-                                    self.statusLabel.text = "Canceled"
+                                }else{
+                                    self.statusLabel.text = "Cancelled"
                                 }
                                 self.subtotalLabel.text=data?["sub_total"] as! String
                                 self.shippingChargesLabel.text=data?["shipping_charge"] as! String
@@ -183,7 +200,9 @@ class OrderDetailsViewController: UIViewController, UITableViewDelegate, UITable
                                 for i in self.cartArray! {
                                     let object = i as? NSDictionary
                                     self.nameArray.add((object?.value(forKey: "product") as! NSDictionary).value(forKey: "name") as! String)
-                                    self.imagePathArray.add((object?.value(forKey: "product") as! NSDictionary).value(forKey: "image_path") as! String)
+                                    self.productIdArray.add((object?.value(forKey: "inventry") as! NSDictionary).value(forKey: "id") as! Int)
+                                    self.inventryIdArray.add((object?.value(forKey: "product") as! NSDictionary).value(forKey: "id") as! Int)
+                                    self.imagePathArray.add((object?.value(forKey: "product") as! NSDictionary).value(forKey: "image") as! String)
                                     self.quantityArray.add(object?.value(forKey: "qty") as! String)
                                     self.priceArray.add(object?.value(forKey: "sub_total") as! String)
                                 }

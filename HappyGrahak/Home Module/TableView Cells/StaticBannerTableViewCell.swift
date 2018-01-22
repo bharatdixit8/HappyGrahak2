@@ -11,6 +11,7 @@ import UIKit
 class StaticBannerTableViewCell: UITableViewCell, UIScrollViewDelegate {
 
     @IBOutlet var scrollView: UIScrollView!
+    @IBOutlet var imgView: UIImageView!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

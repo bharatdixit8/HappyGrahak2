@@ -15,6 +15,7 @@ class CategoryTableViewCell: UITableViewCell, UICollectionViewDataSource, UIColl
     var  data: NSArray?
     var sub_category: SubCategoryModel?
     
+    @IBOutlet var footerLabel: UILabel!
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if((sub_category) != nil){
             print(sub_category?.id?.count)
@@ -35,8 +36,17 @@ class CategoryTableViewCell: UITableViewCell, UICollectionViewDataSource, UIColl
         if((sub_category) != nil){
             collectionCell.productName.text = sub_category?.name?.object(at: indexPath.row) as? String
             let url = URL(string: (sub_category?.image_path?.object(at: indexPath.row) as? String)!)
+            DispatchQueue.global().async {
             let data = try? Data(contentsOf: url!)
-            collectionCell.productIcon.image = UIImage(data: data!)
+            if data==nil{
+                collectionCell.productIcon.image = UIImage(named: "default_product_icon")
+            }else{
+                DispatchQueue.main.async() {
+                    collectionCell.productIcon.image = UIImage(data: data!)
+                }
+            }
+            }
+            
             collectionCell.accessibilityIdentifier = sub_category?.id?.object(at: indexPath.row) as? String
         }
         
@@ -45,7 +55,7 @@ class CategoryTableViewCell: UITableViewCell, UICollectionViewDataSource, UIColl
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize
     {
-        return CGSize(width: 117.5, height: 117.5);
+        return CGSize(width: collectionView.frame.size.width/2.15, height: collectionView.frame.size.width/2.15);
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath){
@@ -75,8 +85,13 @@ class CategoryTableViewCell: UITableViewCell, UICollectionViewDataSource, UIColl
         collectionView.dataSource = self
         collectionView.backgroundColor = UIColor.clear
         self.collectionView!.register(UINib(nibName: "CategoryCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "CollectionViewCell")
-        //layout.minimumInterItemSpacing = 11;
-        // Configure the view for the selected state
+        let tap = UITapGestureRecognizer(target: self, action: #selector(tapFunction(sender:)))
+        self.footerLabel.addGestureRecognizer(tap)
+        
+    }
+    
+    @objc func tapFunction(sender:UITapGestureRecognizer) {
+//        print(sender.s)
     }
     
 }

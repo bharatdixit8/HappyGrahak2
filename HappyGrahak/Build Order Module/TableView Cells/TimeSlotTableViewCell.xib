@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="timeslot" id="KGk-i7-Jjw" customClass="TimeSlotTableViewCell" customModule="HappyGrahak" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VcG-6E-1Ht">
+                        <rect key="frame" x="38" y="8" width="274" height="28"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gEh-J7-ewh">
+                        <rect key="frame" x="8" y="11" width="22" height="22"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="gEh-J7-ewh" secondAttribute="height" multiplier="1:1" id="W8d-6e-fSm"/>
+                        </constraints>
+                        <state key="normal" image="not_selected_icon"/>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="VcG-6E-1Ht" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="HX2-ns-EfP"/>
+                    <constraint firstAttribute="trailing" secondItem="VcG-6E-1Ht" secondAttribute="trailing" constant="8" id="Pgp-zc-lVx"/>
+                    <constraint firstItem="gEh-J7-ewh" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="11" id="WWw-ra-QJL"/>
+                    <constraint firstAttribute="bottom" secondItem="VcG-6E-1Ht" secondAttribute="bottom" constant="7.5" id="avK-xs-keS"/>
+                    <constraint firstItem="gEh-J7-ewh" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="eWt-OT-eG0"/>
+                    <constraint firstAttribute="bottom" secondItem="gEh-J7-ewh" secondAttribute="bottom" constant="10.5" id="qD5-yY-XA5"/>
+                    <constraint firstItem="VcG-6E-1Ht" firstAttribute="leading" secondItem="gEh-J7-ewh" secondAttribute="trailing" constant="8" id="tSc-1n-YMs"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="slotBtn" destination="gEh-J7-ewh" id="OUn-tW-PP3"/>
+                <outlet property="slotLabel" destination="VcG-6E-1Ht" id="ZVW-aI-vhK"/>
+            </connections>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="not_selected_icon" width="15" height="15"/>
+    </resources>
+</document>

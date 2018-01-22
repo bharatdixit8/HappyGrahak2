@@ -13,7 +13,9 @@ class OrderHistoryViewController: UIViewController, UITableViewDelegate, UITable
     var totalArray: NSMutableArray = NSMutableArray()
     var payModeArray: NSMutableArray = NSMutableArray()
     var statusArray: NSMutableArray = NSMutableArray()
+    var lastStatusArray: NSMutableArray = NSMutableArray()
     var createdArray: NSMutableArray = NSMutableArray()
+    var orderProductsArray: NSMutableArray = NSMutableArray()
     var button1: UIButton?
     @IBOutlet var historyList: UITableView!
     override func viewDidLoad() {
@@ -33,7 +35,7 @@ class OrderHistoryViewController: UIViewController, UITableViewDelegate, UITable
         self.navigationController?.navigationBar.addSubview(button1!)
         self.navigationItem.title = "Order History"
         self.navigationItem.hidesBackButton = true
-        self.navigationController!.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white, NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 18.0)]
+        self.navigationController!.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.black, NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 18.0)]
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -67,64 +69,77 @@ class OrderHistoryViewController: UIViewController, UITableViewDelegate, UITable
         cell.tag = orderIdArray.object(at: indexPath.row) as! Int
         cell.cancelBtn.tag = orderIdArray.object(at: indexPath.row) as! Int
         cell.orderIdLabel.text = "Order Id: \(orderIdArray.object(at: indexPath.row))"
-        if (statusArray.object(at: indexPath.row) as! String)=="0" {
-            cell.trackerView.progress = 0.1
+        if (statusArray.object(at: indexPath.row) as! String)=="3" {
+            
             cell.pendingLabel.isHidden = false
             cell.progressLabel.isHidden = true
             cell.dispatchLabel.isHidden = true
+            cell.oFDelivery.isHidden = true
             cell.deliveredLabel.isHidden = true
-            cell.pendingImage.image = UIImage(named: "green_dot")
-            cell.progressImage.image = UIImage(named: "grey_dot")
-            cell.dispatchImage.image = UIImage(named: "grey_dot")
-            cell.deliveredImage.image = UIImage(named: "grey_dot")
-        } else if (statusArray.object(at: indexPath.row) as! String)=="1" {
-            cell.trackerView.progress = 0.35
+            cell.progressImg.image = UIImage(named: "order_step1")
+
+        } else if (statusArray.object(at: indexPath.row) as! String)=="4" {
+            
             cell.pendingLabel.isHidden = true
             cell.progressLabel.isHidden = false
             cell.dispatchLabel.isHidden = true
+            cell.oFDelivery.isHidden = true
             cell.deliveredLabel.isHidden = true
-            cell.pendingImage.image = UIImage(named: "green_dot")
-            cell.progressImage.image = UIImage(named: "green_dot")
-            cell.dispatchImage.image = UIImage(named: "grey_dot")
-            cell.deliveredImage.image = UIImage(named: "grey_dot")
-        } else if (statusArray.object(at: indexPath.row) as! String)=="2" {
-            cell.trackerView.progress = 0.70
+            cell.progressImg.image = UIImage(named: "order_step2")
+
+        } else if (statusArray.object(at: indexPath.row) as! String)=="5" {
+        
             cell.pendingLabel.isHidden = true
             cell.progressLabel.isHidden = true
             cell.dispatchLabel.isHidden = false
+            cell.oFDelivery.isHidden = true
             cell.deliveredLabel.isHidden = true
-            cell.pendingImage.image = UIImage(named: "green_dot")
-            cell.progressImage.image = UIImage(named: "green_dot")
-            cell.dispatchImage.image = UIImage(named: "green_dot")
-            cell.deliveredImage.image = UIImage(named: "grey_dot")
-        } else if (statusArray.object(at: indexPath.row) as! String)=="3" {
-            cell.trackerView.progress = 1.0
+            cell.progressImg.image = UIImage(named: "order_step3")
+
+        } else if (statusArray.object(at: indexPath.row) as! String)=="6" {
+            
             cell.pendingLabel.isHidden = true
             cell.progressLabel.isHidden = true
             cell.dispatchLabel.isHidden = true
+            cell.oFDelivery.isHidden = false
+            cell.deliveredLabel.isHidden = true
+            cell.progressImg.image = UIImage(named: "order_step4")
+
+        } else if (statusArray.object(at: indexPath.row) as! String)=="7" {
+            
+            cell.pendingLabel.isHidden = true
+            cell.progressLabel.isHidden = true
+            cell.dispatchLabel.isHidden = true
+            cell.oFDelivery.isHidden = true
             cell.deliveredLabel.isHidden = false
-            cell.pendingImage.image = UIImage(named: "green_dot")
-            cell.progressImage.image = UIImage(named: "green_dot")
-            cell.dispatchImage.image = UIImage(named: "green_dot")
-            cell.deliveredImage.image = UIImage(named: "green_dot")
+            cell.progressImg.image = UIImage(named: "order_step5")
+            cell.cancelBtn.isHidden = true
         } else {
-            cell.trackerView.progress = 1.0
+            
             cell.pendingLabel.isHidden = true
             cell.progressLabel.isHidden = true
             cell.dispatchLabel.isHidden = true
+            cell.oFDelivery.isHidden = true
             cell.deliveredLabel.isHidden = false
             cell.deliveredLabel.text = "Canceled"
             cell.deliveredLabel.textColor = UIColor.red
-            cell.pendingImage.image = UIImage(named: "green_dot")
-            cell.progressImage.image = UIImage(named: "green_dot")
-            cell.dispatchImage.image = UIImage(named: "green_dot")
-            cell.deliveredImage.image = UIImage(named: "red_dot")
+            if (self.lastStatusArray.object(at: indexPath.row) as! String) == "3" {
+                cell.progressImg.image = UIImage(named: "cancel_step1")
+            }else if (self.lastStatusArray.object(at: indexPath.row) as! String) == "4" {
+                cell.progressImg.image = UIImage(named: "cancel_step2")
+            }else if (self.lastStatusArray.object(at: indexPath.row) as! String) == "5" {
+                cell.progressImg.image = UIImage(named: "cancel_step3")
+            }else if (self.lastStatusArray.object(at: indexPath.row) as! String) == "6" {
+                cell.progressImg.image = UIImage(named: "cancel_step4")
+            }
+            cell.cancelBtn.isHidden = true
         }
         cell.layer.cornerRadius = 10.0
         cell.amountLabel.text = " Total Amount: Rs. \(totalArray.object(at: indexPath.row) as! String)"
         cell.cancelBtn.addTarget(self, action: #selector(self.cancelOrder(sender:)), for: .touchUpInside)
         //cell.paymentModeLabel.text = payModeArray.object(at: indexPath.row) as! String
         cell.timerLabel.text = createdArray.object(at: indexPath.row) as! String
+        cell.itemsOrderedList.text = (self.orderProductsArray.object(at: indexPath.row) as! NSArray).componentsJoined(by: ", ")
         return cell!
     }
     
@@ -240,13 +255,16 @@ class OrderHistoryViewController: UIViewController, UITableViewDelegate, UITable
                             let result = result as! NSDictionary
                             var error: Bool?
                             var message: NSArray?
+                            var cartArray: NSArray?
                             
+                            var cartDataArray: NSMutableArray = NSMutableArray()
                             var  data: NSArray?
                             self.orderIdArray = NSMutableArray()
                             self.totalArray = NSMutableArray()
                             self.payModeArray = NSMutableArray()
                             self.statusArray = NSMutableArray()
                             self.createdArray = NSMutableArray()
+                            self.lastStatusArray = NSMutableArray()
                             error = result["error"] as? Bool
                             message = result["msg"] as? NSArray
                             data = result["data"] as? NSArray
@@ -258,7 +276,18 @@ class OrderHistoryViewController: UIViewController, UITableViewDelegate, UITable
                                     self.payModeArray.add(object["pay_mode"])
                                     self.statusArray.add(object["status"])
                                     self.createdArray.add(object["created_at"])
+                                    self.lastStatusArray.add(object["last_status"])
+                                    var productNameArray: NSMutableArray = NSMutableArray()
+                                    cartArray = object["cart_data"] as! NSArray
+                                    for j in cartArray! {
+                                        let cartItem = j as! NSDictionary
+                                        productNameArray.add((cartItem["product"] as! NSDictionary)["title"] as! String)
+                                    }
+                                    cartDataArray.add(cartArray)
+                                    self.orderProductsArray.add(productNameArray)
                                 }
+                                
+                                print(self.orderProductsArray)
                                 self.historyList.reloadData()
                             }else{
                             }

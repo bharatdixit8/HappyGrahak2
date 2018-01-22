@@ -85,16 +85,16 @@ class OTPViewController: UIViewController, UITextFieldDelegate{
         self.navigationController?.popViewController(animated: true)
     }
     
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange,replacementString string: String) -> Bool
-    {
-        if textField == otpTextField{
-            if textField.text?.characters.count == 6{
-                self.getImmovableAssetInfo()
-                return false
-            }
-        }
-        return true
-    }
+//    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange,replacementString string: String) -> Bool
+//    {
+//        if textField == otpTextField{
+//            if textField.text?.characters.count == 6{
+//                self.getImmovableAssetInfo()
+//                return false
+//            }
+//        }
+//        return true
+//    }
     
     @objc func startTimer() {
         countdownTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)

@@ -8,14 +8,24 @@
 
 import UIKit
 import CoreData
+import UserNotifications
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
 
     var window: UIWindow?
     var users: UserDetailsModel?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        
+        let center  = UNUserNotificationCenter.current()
+        center.delegate = self
+        // set the type as sound or badge
+        center.requestAuthorization(options: [.sound,.alert,.badge]) { (granted, error) in
+            // Enable or disable features based on authorization
+            
+        }
+        application.registerForRemoteNotifications()
 //        let defaults = UserDefaults.standard
 //        if (UserDefaults.standard.value(forKey:"userId") != nil) {
 //           let viewController = SideBarRootViewController(nibName: "SideBarRootViewController_iPhone", bundle: nil)
@@ -57,6 +67,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         // Saves changes in the application's managed object context before the application terminates.
         self.saveContext()
+    }
+    
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        var token = ""
+        for i in 0..<deviceToken.count {
+            token = token + String(format: "%02.2hhx", arguments: [deviceToken[i]])
+        }
+        print("Registration succeeded!")
+        print("Token: ", token)
+    }
+    
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
+        print("Registration failed!")
+    }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter,  willPresent notification: UNNotification, withCompletionHandler   completionHandler: @escaping (_ options:   UNNotificationPresentationOptions) -> Void) {
+        print("Handle push from foreground")
+        // custom code to handle push while app is in the foreground
+        print("\(notification.request.content.userInfo)")
+    }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        print("Handle push from background or closed")
+        // if you set a member variable in didReceiveRemoteNotification, you  will know if this is from closed or background
+        print("\(response.notification.request.content.userInfo)")
     }
 
     // MARK: - Core Data stack

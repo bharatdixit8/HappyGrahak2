@@ -45,17 +45,23 @@ class MostPopularTableViewCell: UITableViewCell, UICollectionViewDelegate, UICol
         }
         
         collectionCell.nameLabel.text = nameArray?.object(at: indexPath.row) as? String
-        let url = URL(string: (image_pathArray?.object(at: indexPath.row) as? String)!)
+        print(image_pathArray)
+        if let str = image_pathArray?.object(at: indexPath.row) as? String? {
+            let url = URL(string: str!)
         let data = try? Data(contentsOf: url!)
-        collectionCell.imgView.image = UIImage(data: data!)
-        
+        if data==nil{
+            collectionCell.imgView.image = UIImage(named: "default_product_icon")
+        }else{
+            collectionCell.imgView.image = UIImage(data: data!)
+        }
+        }
         return collectionCell
     }
     
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.frame.size.width/2.12, height: 100.0);
+        return CGSize(width: collectionView.frame.size.width/2.12, height: 120.0);
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath){
@@ -117,7 +123,7 @@ class MostPopularTableViewCell: UITableViewCell, UICollectionViewDelegate, UICol
                                 for i in data! {
                                     let object = i as? NSDictionary
                                     self.idArray?.add(object?.value(forKey: "id"))
-                                    self.nameArray?.add(object?.value(forKey: "name"))
+                                    self.nameArray?.add(object?.value(forKey: "title"))
                                     self.image_pathArray?.add(object?.value(forKey: "image"))
                                     self.created_atArray?.add(object?.value(forKey: "created_at"))
                                     //self.statusArray?.add(object?.value(forKey: "status"))

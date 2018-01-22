@@ -33,7 +33,7 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="product_Icon" translatesAutoresizingMaskIntoConstraints="NO" id="sF6-49-MGS">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default_product_icon" translatesAutoresizingMaskIntoConstraints="NO" id="sF6-49-MGS">
                         <rect key="frame" x="30" y="22" width="60" height="60"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="sF6-49-MGS" secondAttribute="height" multiplier="1:1" id="3Wn-Ht-bY9"/>
@@ -60,6 +60,6 @@
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="product_Icon" width="389" height="400"/>
+        <image name="default_product_icon" width="65" height="65"/>
     </resources>
 </document>

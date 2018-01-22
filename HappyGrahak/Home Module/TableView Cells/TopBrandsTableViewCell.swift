@@ -45,11 +45,15 @@ class TopBrandsTableViewCell: UITableViewCell, UICollectionViewDelegate, UIColle
         collectionCell.nameLabel.text = nameArray?.object(at: indexPath.row) as? String
         if ((image_pathArray?.object(at: indexPath.row) as? String) != nil) {
         let url = URL(string: (image_pathArray?.object(at: indexPath.row) as? String)!)
+        DispatchQueue.global().async {
         let data = try? Data(contentsOf: url!)
         if data != nil {
-            collectionCell.imgView.image = UIImage(data: data!)
+            DispatchQueue.main.async() {
+                collectionCell.imgView.image = UIImage(data: data!)
+            }
         } else {
             collectionCell.imgView.image = UIImage(named: "default_product_icon")
+        }
         }
         }
         return collectionCell
@@ -58,7 +62,7 @@ class TopBrandsTableViewCell: UITableViewCell, UICollectionViewDelegate, UIColle
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 140.0, height: 140.0);
+        return CGSize(width: 145.0, height: 145.0);
     }
     @objc func getSubCategory(){
         let params: String
@@ -109,7 +113,8 @@ class TopBrandsTableViewCell: UITableViewCell, UICollectionViewDelegate, UIColle
                                     self.created_atArray?.add(object?.value(forKey: "created_at"))
                                     self.statusArray?.add(object?.value(forKey: "status"))
                                 }
-                                self.collectionView.reloadData()
+                                
+                                //self.collectionView.reloadData()
                             }else{
                             }
                         }

@@ -21,6 +21,7 @@ class MyCartViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var unitArray: NSMutableArray = NSMutableArray()
     var imgPathArray: NSMutableArray = NSMutableArray()
     var sellPriceArray: NSMutableArray = NSMutableArray()
+    var invtImageArray: NSMutableArray = NSMutableArray()
     var button1: UIButton?
     var totalAmount: Float = 0.00
     var myCarts: [MyCart] = []
@@ -32,6 +33,7 @@ class MyCartViewController: UIViewController, UITableViewDelegate, UITableViewDa
     @IBOutlet var headerLabel2: UILabel!
     @IBOutlet var headerLabel3: UILabel!
     @IBOutlet var amountDetailView: UIView!
+    @IBOutlet var activityIndicator: UIActivityIndicatorView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,6 +43,8 @@ class MyCartViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.activityIndicator.isHidden = false
+        self.activityIndicator.startAnimating()
         let button: UIButton = self.navigationController?.navigationBar.viewWithTag(2001) as! UIButton
         button.isHidden = true
         let label: UILabel = self.navigationController?.navigationBar.viewWithTag(1001) as! UILabel
@@ -54,6 +58,7 @@ class MyCartViewController: UIViewController, UITableViewDelegate, UITableViewDa
         cartListView.dataSource = self
         self.navigationItem.hidesBackButton = true
         self.navigationItem.title = "My Cart"
+        self.navigationController!.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.black, NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 18.0)]
         if (UserDefaults.standard.value(forKey:"userId") != nil) {
             self.getAllOnlineCart()
         } else {
@@ -91,10 +96,38 @@ class MyCartViewController: UIViewController, UITableViewDelegate, UITableViewDa
             tableView.register(UINib(nibName: "MyCartTableViewCell", bundle: nil), forCellReuseIdentifier: "cartCell")
             cell = tableView.dequeueReusableCell(withIdentifier: "cartCell") as? MyCartTableViewCell
         }
-        if let path = (self.imgPathArray.object(at: indexPath.row) as? String) {
-            let url = URL(string: path)
-            let data = try? Data(contentsOf: url!)
-            cell?.imgView.image = UIImage(data: data!)
+        cell?.tag = (self.productIdArray[indexPath.row] as! NSString).integerValue
+        cell?.accessibilityIdentifier = "\(self.invtIdArray[indexPath.row])"
+        if (UserDefaults.standard.value(forKey:"userId") != nil) {
+            if let path = ((self.invtImageArray.object(at: indexPath.row) as! NSArray)[0] as? String) {
+                let url = URL(string: path)
+                let data: Data?
+                if url != nil{
+                    data = try? Data(contentsOf: url!)
+                    if data != nil{
+                        cell?.imgView.image = UIImage(data: data!)
+                    }else{
+                        cell?.imgView.image = UIImage(named: "default_product_icon")
+                    }
+                }else{
+                    cell?.imgView.image = UIImage(named: "default_product_icon")
+                }
+            }
+        }else{
+            if let path = (self.invtImageArray.object(at: indexPath.row) as? String) {
+                let url = URL(string: path)
+                let data: Data?
+                if url != nil{
+                    data = try? Data(contentsOf: url!)
+                    if data != nil{
+                        cell?.imgView.image = UIImage(data: data!)
+                    }else{
+                        cell?.imgView.image = UIImage(named: "default_product_icon")
+                    }
+                }else{
+                    cell?.imgView.image = UIImage(named: "default_product_icon")
+                }
+            }
         }
         cell?.selectionStyle = UITableViewCellSelectionStyle.none
         cartListView.separatorStyle = UITableViewCellSeparatorStyle.none
@@ -108,7 +141,17 @@ class MyCartViewController: UIViewController, UITableViewDelegate, UITableViewDa
         cell?.minusBtn.addTarget(self, action: #selector(self.updateCart(sender:)), for: .touchUpInside)
         cell?.plusBtn.addTarget(self, action: #selector(self.updateCart(sender:)), for: .touchUpInside)
         cell?.removeBtn.addTarget(self, action: #selector(self.addAlert(sender:)), for: .touchUpInside)
+        
         return cell!
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cells = cartListView.cellForRow(at: indexPath) as! MyCartTableViewCell
+        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+        let nextViewController = storyBoard.instantiateViewController(withIdentifier: "ProductDetailsViewController") as! ProductDetailsViewController
+        nextViewController.productId = cells.tag
+        nextViewController.invId = (cells.accessibilityIdentifier as! NSString).integerValue
+        self.navigationController?.pushViewController(nextViewController, animated: true)
     }
     
     @objc func addAlert(sender: UIButton) {
@@ -121,6 +164,8 @@ class MyCartViewController: UIViewController, UITableViewDelegate, UITableViewDa
         // add an action (button)
         let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) {
             UIAlertAction in
+            self.activityIndicator.isHidden = false
+            self.activityIndicator.startAnimating()
             if (UserDefaults.standard.value(forKey:"userId") != nil) {
                 self.removeCartOnline(sender: sender)
             } else {
@@ -245,6 +290,8 @@ class MyCartViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     @objc func updateCart(sender: UIButton){
+        self.activityIndicator.isHidden = false
+        self.activityIndicator.startAnimating()
         if (UserDefaults.standard.value(forKey:"userId") != nil) {
             self.updateCartOnline(sender: sender)
         } else {
@@ -385,7 +432,7 @@ class MyCartViewController: UIViewController, UITableViewDelegate, UITableViewDa
         self.nameArray = NSMutableArray()
         self.quantityArray = NSMutableArray()
         self.unitArray = NSMutableArray()
-        self.imgPathArray = NSMutableArray()
+        self.invtImageArray = NSMutableArray()
         self.sellPriceArray = NSMutableArray()
         totalAmount = 0.00
         for order in myCarts {
@@ -393,7 +440,7 @@ class MyCartViewController: UIViewController, UITableViewDelegate, UITableViewDa
             self.productIdArray.add(order.productId)
             self.invtIdArray.add(order.invt_id)
             self.quantityArray.add(order.quantity)
-            self.imgPathArray.add(order.imgPath)
+            self.invtImageArray.add(order.imgPath)
             self.nameArray.add(order.productName)
             self.sellPriceArray.add(order.price)
             self.unitArray.add(order.unit)
@@ -412,7 +459,8 @@ class MyCartViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         print(totalAmount)
         
-        
+        self.activityIndicator.stopAnimating()
+        self.activityIndicator.isHidden = true
         //self.cartListView.reloadData()
     }
     
@@ -543,6 +591,7 @@ class MyCartViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                     self.view.addSubview(button)
                                     self.getAmount()
                                 } else {
+                                    self.invtImageArray = NSMutableArray()
                                 for index in data! {
                                     let object = index as! NSDictionary
                                     self.cartIdArray.add(object.value(forKey: "id"))
@@ -552,7 +601,15 @@ class MyCartViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                     productDict = object.value(forKey: "product") as! NSDictionary
                                     invDict = object.value(forKey: "inventry") as! NSDictionary
                                     let unitDict = invDict?.value(forKey: "unit") as? NSDictionary
-                                    self.imgPathArray.add(productDict?.value(forKey: "image_path"))
+                                    self.imgPathArray = NSMutableArray()
+                                    if (invDict?.value(forKey: "images") as! NSArray).count>0{
+//                                        print(((object.value(forKey: "images") as! NSArray)[0] as! NSArray)[0] as! NSDictionary)
+                                        //let inventImagesArray =
+                                        let inventoryImageDict = ((invDict?.value(forKey: "images") as! NSArray)[0] as! NSDictionary)
+                                        let inventoryImage = inventoryImageDict.value(forKey: "image") as! String
+                                        self.imgPathArray.add(inventoryImage)
+                                    }
+                                    //self.imgPathArray.add(productDict?.value(forKey: "image_path"))
                                     self.nameArray.add(productDict?.value(forKey: "name"))
                                     let price: String = invDict?.value(forKey: "sell_price") as! String
                                     self.sellPriceArray.add("Price: " + price)
@@ -560,10 +617,13 @@ class MyCartViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                     let unit: String = unitDict?.value(forKey: "symb") as! String
                                     let weight: String = quantity + " " + unit
                                     self.unitArray.add(weight)
+                                    self.invtImageArray.add(self.imgPathArray)
                                     self.cartListView.reloadData()
                                     self.getAmount()
                                 }
+                                   print(self.invtImageArray)
                                 }
+                                
                             }else{
                             }
                         }
@@ -645,6 +705,8 @@ class MyCartViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                 self.subTotalLabel.text = "\(subTotal)"
                                 self.shippingLabel.text = "\(shipping)"
                                 self.totalLabel.text = "\(total)"
+                                self.activityIndicator.stopAnimating()
+                                self.activityIndicator.isHidden = true
                             }else{
                             }
                         }

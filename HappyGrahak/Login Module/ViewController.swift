@@ -28,12 +28,12 @@ class ViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         //let defaults = UserDefaults.standard
-        let viewController = SideBarRootViewController(nibName: "SideBarRootViewController_iPhone", bundle: nil)
-        if (UserDefaults.standard.value(forKey:"userId") != nil) {
-            self.navigationController?.pushViewController(viewController, animated: true)
-        }else{
-            
-        }
+//        let viewController = SideBarRootViewController(nibName: "SideBarRootViewController_iPhone", bundle: nil)
+//        if (UserDefaults.standard.value(forKey:"userId") != nil) {
+//            self.navigationController?.pushViewController(viewController, animated: true)
+//        }else{
+//            
+//        }
         self.navigationController?.setNavigationBarHidden(true, animated: true)
     }
 

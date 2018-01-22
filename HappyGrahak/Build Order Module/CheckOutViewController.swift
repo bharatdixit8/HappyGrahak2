@@ -35,6 +35,7 @@ class CheckOutViewController: UIViewController, UITableViewDelegate, UITableView
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        addressList.reloadData()
         totalLable.text = "Total: \(totalAmt!)"
         let button1 = UIButton.init(type: .custom)
         button1.setImage(UIImage.init(named: "back_Icon"), for: UIControlState.normal)
@@ -43,7 +44,7 @@ class CheckOutViewController: UIViewController, UITableViewDelegate, UITableView
         let barButton1 = UIBarButtonItem.init(customView: button1)
         self.navigationItem.leftBarButtonItem = barButton1
         self.navigationItem.title = "Delivery Address"
-        self.navigationController!.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white, NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 18.0)]
+        self.navigationController!.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.black, NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 18.0)]
         
         let button: UIButton = self.navigationController?.navigationBar.viewWithTag(2001) as! UIButton
         button.isHidden = true

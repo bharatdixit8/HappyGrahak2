@@ -49,7 +49,7 @@ class BannerScrollTableViewCell: UITableViewCell, UIScrollViewDelegate {
     }
     
     @objc func update(sender: AnyObject) -> () {
-        if(pageControl.currentPage<3){
+        if(pageControl.currentPage<pageControl.numberOfPages-1){
             pageControl.currentPage+=1
             let x = CGFloat(pageControl.currentPage) * bannerScroll.frame.size.width
             bannerScroll.setContentOffset(CGPoint(x: x,y :0), animated: true)

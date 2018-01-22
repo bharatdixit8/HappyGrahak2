@@ -35,7 +35,7 @@ class WishListViewController: UIViewController, UITableViewDelegate, UITableView
         let barButton1 = UIBarButtonItem.init(customView: button1)
         self.navigationItem.leftBarButtonItem = barButton1
         self.navigationItem.title = "My WishList"
-        self.navigationController!.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white, NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 18.0)]
+        self.navigationController!.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.black, NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 18.0)]
         
         self.getWishlistHistory()
     }
@@ -148,6 +148,22 @@ class WishListViewController: UIViewController, UITableViewDelegate, UITableView
         cell?.deleteBtn.tag = wishlistIdArray.object(at: indexPath.row) as! Int
         cell?.deleteBtn.addTarget(self, action: #selector(self.removeWish(sender:)), for: .touchUpInside)
         return cell!
+    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cells = wishlistTable.cellForRow(at: indexPath) as! WishListTableViewCell
+        let indx = self.wishlistIdArray.index(of: cells.tag) as! Int
+        productIdArray.object(at: indx)
+        inventryIdArray.object(at: indx)
+        
+        print(productIdArray.object(at: indx))
+        print(inventryIdArray.object(at: indx))
+        
+        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+        let nextViewController = storyBoard.instantiateViewController(withIdentifier: "ProductDetailsViewController") as! ProductDetailsViewController
+        nextViewController.productId = (productIdArray[indexPath.row] as! NSString).integerValue
+        nextViewController.invId = (inventryIdArray[indexPath.row] as! NSString).integerValue
+        self.navigationController?.pushViewController(nextViewController, animated: true)
+        
     }
     
     @objc func removeWish(sender: UIButton) {

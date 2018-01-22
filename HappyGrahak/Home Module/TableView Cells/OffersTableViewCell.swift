@@ -46,7 +46,11 @@ class OffersTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollecti
         //        collectionCell.nameLabel.text = nameArray?.object(at: indexPath.row) as? String
                 let url = URL(string: (image_pathArray?.object(at: indexPath.row) as? String)!)
                 let data = try? Data(contentsOf: url!)
-                collectionCell.imgView.image = UIImage(data: data!)
+                if data==nil{
+                    collectionCell.imgView.image = UIImage(named: "default_product_icon")
+                }else{
+                    collectionCell.imgView.image = UIImage(data: data!)
+                }
         return collectionCell
     }
     
@@ -103,7 +107,12 @@ class OffersTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollecti
                                     self.nameArray?.add(object?.value(forKey: "name"))
                                     self.image_pathArray?.add(object?.value(forKey: "image"))
                                 }
-                                self.collectionView.reloadData()
+                                print("images:-",self.image_pathArray)
+                                if ((self.image_pathArray!.count) > 0) {
+                                    self.collectionView.reloadData()
+                                }else{
+                                    self.collectionView.isHidden = true
+                                }
                             }else{
                             }
                         }

@@ -17,11 +17,12 @@ class ProductListViewController: UIViewController, UITableViewDataSource, UITabl
     var button1: UIButton?
     let idArray: NSMutableArray? = NSMutableArray()
     let  brandArray: NSMutableArray? = NSMutableArray()
+    var invtImageArray: NSMutableArray? = NSMutableArray()
     let nameArray: NSMutableArray? = NSMutableArray()
     let  deleted_atArray: NSMutableArray? = NSMutableArray()
     let titleArray: NSMutableArray? = NSMutableArray()
     let  imageArray: NSMutableArray? = NSMutableArray()
-    let image_pathArray: NSMutableArray? = NSMutableArray()
+    var image_pathArray: NSMutableArray? = NSMutableArray()
     let  keywordsArray: NSMutableArray? = NSMutableArray()
     let descripArray: NSMutableArray? = NSMutableArray()
     let  updated_atArray: NSMutableArray? = NSMutableArray()
@@ -38,6 +39,8 @@ class ProductListViewController: UIViewController, UITableViewDataSource, UITabl
     var flag: Bool = false
     var myCarts: [MyCart] = []
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    
+    @IBOutlet var activityIndicator: UIActivityIndicatorView!
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return (self.nameArray?.count)!
     }
@@ -51,17 +54,33 @@ class ProductListViewController: UIViewController, UITableViewDataSource, UITabl
         cell?.weightArray = self.inventryWeightArray![indexPath.row] as! NSArray
         //tableView.separatorStyle = UITableViewCellSeparatorStyle.none
         cell?.selectionStyle = UITableViewCellSelectionStyle.none
-        cell?.nameLabel.text = self.nameArray?.object(at: indexPath.row) as! String
+        cell?.nameLabel.text = self.nameArray?.object(at: indexPath.row) as? String
 //        cell?.dropBtn.layer.borderWidth = 1.0
 //        cell?.dropBtn.layer.borderColor = UIColor.black.cgColor
-        if let path = (self.image_pathArray?.object(at: indexPath.row) as? String)
+        print(self.invtImageArray)
+        if ((self.image_pathArray!.count)>0) {
+        if let path = ((self.invtImageArray?.object(at: indexPath.row) as? NSArray)?.object(at: 0) as? String)
         {
             let url = URL(string: path)
-            let data = try? Data(contentsOf: url!)
-            cell?.imgIconView.image = UIImage(data: data!)
+            DispatchQueue.global().async {
+            var data: Data?
+            if url != nil {
+                data = try? Data(contentsOf: url!)
+            }
+            if data != nil {
+                DispatchQueue.main.async() {
+                    self.cell?.imgIconView.image = UIImage(data: data!)
+                }
+            }else{
+                self.cell?.imgIconView.image = UIImage(named: "default_product_icon")
+            }
+            }
         }
         else
         {
+            cell?.imgIconView.image = UIImage(named: "default_product_icon")
+        }
+        }else{
             cell?.imgIconView.image = UIImage(named: "default_product_icon")
         }
         cell?.tag = indexPath.row+1
@@ -107,6 +126,7 @@ class ProductListViewController: UIViewController, UITableViewDataSource, UITabl
         nextViewController.offer = (self.inventryOfferArray![indexPath.row] as! NSArray)[0] as! String
         nextViewController.mrp = (self.inventryMrpArray![indexPath.row] as! NSArray)[0] as! String
         //print()
+        nextViewController.invtArray = self.inventryArray?.object(at: indexPath.row) as! NSArray
         nextViewController.price = (self.inventrySpArray![indexPath.row] as! NSArray)[0] as! String
         nextViewController.quantity = (self.inventryWeightArray![indexPath.row] as! NSArray)[0] as! String
         nextViewController.quantityArray = self.inventryWeightArray![indexPath.row] as! NSArray
@@ -191,6 +211,16 @@ class ProductListViewController: UIViewController, UITableViewDataSource, UITabl
                             //print("Data:- \(data!)")
                             if (!(error!)){
                                 print("id:- \(self.data!)")
+                                if self.data!.count==0 {
+                                    self.myTable.isHidden = true
+                                    let label = UILabel.init(frame: CGRect(x: 0, y: self.view.frame.size.height/2-20, width: self.view.frame.size.width, height: 40.0))
+                                    label.text = "COMMING SOON..."
+                                    label.textColor = UIColor.black
+                                    label.font = UIFont.boldSystemFont(ofSize: 30.0)
+                                    label.textAlignment = .center
+                                    self.view.addSubview(label)
+                                }
+                                //print(self.data)
                                 for i in self.data! {
                                     let object = i as? NSDictionary
                                     print(object?.value(forKey: "id"))
@@ -200,7 +230,7 @@ class ProductListViewController: UIViewController, UITableViewDataSource, UITabl
                                     self.deleted_atArray?.add(object?.value(forKey: "deleted_at"))
                                     self.titleArray?.add(object?.value(forKey: "title"))
                                     self.imageArray?.add(object?.value(forKey: "image"))
-//                                    self.image_pathArray?.add(object?.value(forKey: "image_path"))
+                                    //                                    self.image_pathArray?.add(object?.value(forKey: "image_path"))
                                     self.keywordsArray?.add(object?.value(forKey: "keywords"))
                                     self.descripArray?.add(object?.value(forKey: "description"))
                                     self.updated_atArray?.add(object?.value(forKey: "updated_at"))
@@ -208,7 +238,9 @@ class ProductListViewController: UIViewController, UITableViewDataSource, UITabl
                                     self.created_atArray?.add(object?.value(forKey: "created_at"))
                                     self.inventryArray?.add(object?.value(forKey: "inventry"))
                                 }
-                                //print(self.inventryArray![0])
+                                print(self.inventryArray)
+                                self.invtImageArray = NSMutableArray()
+                                
                                 for i in self.inventryArray! {
                                     let object = i as? NSArray
                                     print(object![0])
@@ -217,23 +249,28 @@ class ProductListViewController: UIViewController, UITableViewDataSource, UITabl
                                     spArray = NSMutableArray()
                                     offerArray = NSMutableArray()
                                     inventIdArray = NSMutableArray()
+                                    self.image_pathArray = NSMutableArray()
+                                    if (object?.value(forKey: "images") as! NSArray).count>0{
+                                        print(((object?.value(forKey: "images") as! NSArray)[0] as! NSArray)[0] as! NSDictionary)
+                                        //let inventImagesArray =
+                                        let inventoryImageDict = ((object?.value(forKey: "images") as! NSArray)[0] as! NSArray)[0] as! NSDictionary
+                                        let inventoryImage = inventoryImageDict.value(forKey: "image") as! String
+                                        self.image_pathArray?.add(inventoryImage)
+                                    }
                                     for j in object! {
                                         let weight = j as? NSDictionary
+                                        print(weight)
                                         let weightQuantity = weight?.value(forKey: "qty_weight") as! String
                                         let weightUnitDict = weight?.value(forKey: "unit") as! NSDictionary
                                         let weightUnit = weightUnitDict.value(forKey: "symb") as! String
                                         
-                                        let inventoryImageDict = (weight?.value(forKey: "images") as! NSArray) [0] as! NSDictionary
-                                        let inventoryImage = inventoryImageDict.value(forKey: "image") as! String
-                                        self.image_pathArray?.add(inventoryImage)
-                                        
                                         let weightString = weightQuantity + " " + weightUnit
                                         
                                         let mrp = weight?.value(forKey: "mrp") as! String
-                                        mrpArray?.add("\u{20B9}" + mrp)
+                                        mrpArray?.add("\u{20B9} " + mrp)
                                         
                                         let sp = weight?.value(forKey: "sell_price") as! String
-                                        spArray?.add("\u{20B9}" + sp)
+                                        spArray?.add("\u{20B9} " + sp)
                                         
                                         if let offer = (weight?.value(forKey: "offer_precentage") as? String)
                                         {
@@ -254,10 +291,15 @@ class ProductListViewController: UIViewController, UITableViewDataSource, UITabl
                                     self.inventrySpArray?.add(spArray)
                                     self.inventryOfferArray?.add(offerArray)
                                     self.inventryIdArray?.add(inventIdArray)
+                                    self.invtImageArray?.add(self.image_pathArray)
+                                    
                                 }
-                                print(self.inventryWeightArray)
+                                print(self.invtImageArray)
                                 let ptoduct_details = ProductDetailsModel.init(id: self.idArray, name: self.nameArray, title: self.titleArray, image: self.imageArray, image_path: self.image_pathArray, keywords: self.keywordsArray, descrip: self.descripArray, deleted_at: self.deleted_atArray, updated_at: self.updated_atArray, status: self.statusArray, created_at: self.created_atArray, brand: self.brandArray)
+                                
                                 self.myTable.reloadData()
+                                self.activityIndicator.stopAnimating()
+                                self.activityIndicator.isHidden = true
                             }else{
                             }
                         }
@@ -343,6 +385,7 @@ class ProductListViewController: UIViewController, UITableViewDataSource, UITabl
                                     label.textAlignment = .center
                                     self.view.addSubview(label)
                                 }
+                                //print(self.data)
                                 for i in self.data! {
                                     let object = i as? NSDictionary
                                     print(object?.value(forKey: "id"))
@@ -360,7 +403,9 @@ class ProductListViewController: UIViewController, UITableViewDataSource, UITabl
                                     self.created_atArray?.add(object?.value(forKey: "created_at"))
                                     self.inventryArray?.add(object?.value(forKey: "inventry"))
                                 }
-                               // print(self.inventryArray![0])
+                                print(self.inventryArray)
+                                self.invtImageArray = NSMutableArray()
+                                
                                 for i in self.inventryArray! {
                                     let object = i as? NSArray
                                     print(object![0])
@@ -369,23 +414,28 @@ class ProductListViewController: UIViewController, UITableViewDataSource, UITabl
                                     spArray = NSMutableArray()
                                     offerArray = NSMutableArray()
                                     inventIdArray = NSMutableArray()
+                                    self.image_pathArray = NSMutableArray()
+                                    if (object?.value(forKey: "images") as! NSArray).count>0{
+                                        print(((object?.value(forKey: "images") as! NSArray)[0] as! NSArray)[0] as! NSDictionary)
+                                        //let inventImagesArray =
+                                        let inventoryImageDict = ((object?.value(forKey: "images") as! NSArray)[0] as! NSArray)[0] as! NSDictionary
+                                        let inventoryImage = inventoryImageDict.value(forKey: "image") as! String
+                                        self.image_pathArray?.add(inventoryImage)
+                                    }
                                     for j in object! {
                                         let weight = j as? NSDictionary
+                                        print(weight)
                                         let weightQuantity = weight?.value(forKey: "qty_weight") as! String
                                         let weightUnitDict = weight?.value(forKey: "unit") as! NSDictionary
                                         let weightUnit = weightUnitDict.value(forKey: "symb") as! String
                                         
-                                        let inventoryImageDict = (weight?.value(forKey: "images") as! NSArray) [0] as! NSDictionary
-                                        let inventoryImage = inventoryImageDict.value(forKey: "image") as! String
-                                        self.image_pathArray?.add(inventoryImage)
-                                        
                                         let weightString = weightQuantity + " " + weightUnit
                                         
                                         let mrp = weight?.value(forKey: "mrp") as! String
-                                        mrpArray?.add("\u{20B9}" + mrp)
+                                        mrpArray?.add("\u{20B9} " + mrp)
                                         
                                         let sp = weight?.value(forKey: "sell_price") as! String
-                                        spArray?.add("\u{20B9}" + sp)
+                                        spArray?.add("\u{20B9} " + sp)
                                         
                                         if let offer = (weight?.value(forKey: "offer_precentage") as? String)
                                         {
@@ -406,10 +456,15 @@ class ProductListViewController: UIViewController, UITableViewDataSource, UITabl
                                     self.inventrySpArray?.add(spArray)
                                     self.inventryOfferArray?.add(offerArray)
                                     self.inventryIdArray?.add(inventIdArray)
+                                    self.invtImageArray?.add(self.image_pathArray)
+                                    
                                 }
-                                print(self.inventryWeightArray)
+                                print(self.invtImageArray)
                                 let ptoduct_details = ProductDetailsModel.init(id: self.idArray, name: self.nameArray, title: self.titleArray, image: self.imageArray, image_path: self.image_pathArray, keywords: self.keywordsArray, descrip: self.descripArray, deleted_at: self.deleted_atArray, updated_at: self.updated_atArray, status: self.statusArray, created_at: self.created_atArray, brand: self.brandArray)
+                                
                                 self.myTable.reloadData()
+                                self.activityIndicator.stopAnimating()
+                                self.activityIndicator.isHidden = true
                             }else{
                             }
                         }
@@ -467,8 +522,15 @@ class ProductListViewController: UIViewController, UITableViewDataSource, UITabl
         super.viewWillAppear(animated)
        // let controller: DataController?
         //let entityDesc: NSEntityDescription?
+        self.activityIndicator.isHidden = false
+        activityIndicator.startAnimating()
+        
         if flag {
             self.navigationController?.setNavigationBarHidden(false, animated: true)
+            self.getProducts()
+        }else{
+            self.navigationController?.setNavigationBarHidden(false, animated: true)
+            self.getSubCategory()
         }
         
         button1 = UIButton.init(type: .custom)
@@ -476,15 +538,10 @@ class ProductListViewController: UIViewController, UITableViewDataSource, UITabl
         button1?.frame = CGRect.init(x: 0, y: 0, width: 40, height: 40)
         button1?.addTarget(self, action:#selector(self.backAction), for:.touchUpInside)
         self.navigationController?.navigationBar.addSubview(button1!)
-        //        let barButton1 = UIBarButtonItem.init(customView: button1)
         self.navigationItem.hidesBackButton = true
         self.navigationItem.title = headerTitle
-        self.navigationController!.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white, NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 18.0)]
-        if flag {
-            self.getProducts()
-        }else{
-            self.getSubCategory()
-        }
+        self.navigationController!.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.black, NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 18.0)]
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -512,6 +569,9 @@ class ProductListViewController: UIViewController, UITableViewDataSource, UITabl
     }
     
     @objc func addToCart(sender: UIButton){
+        self.activityIndicator.isHidden = false
+        self.activityIndicator.startAnimating()
+        
         if (UserDefaults.standard.value(forKey:"userId") != nil) {
             self.addCartOnline(sender: sender)
         } else {
@@ -566,7 +626,7 @@ class ProductListViewController: UIViewController, UITableViewDataSource, UITabl
                     match.setValue("\(quantity+1)", forKey: "quantity")
                     print(quantity)
                 } catch let error {
-                    // Handle error
+                    
                 }
                     (UIApplication.shared.delegate as! AppDelegate).saveContext()
             } else {
@@ -577,8 +637,8 @@ class ProductListViewController: UIViewController, UITableViewDataSource, UITabl
                         myCart.invt_id = Int16(btn.tag)
                         let cells: ProductListTableViewCell = sender.superview?.superview as! ProductListTableViewCell
                         myCart.productName = nameArray?.object(at: sender.tag-100) as! String
-                        myCart.imgPath = image_pathArray?.object(at: sender.tag-100) as! String
-                        myCart.unit = (cells.weightLabel.text)!
+                        myCart.imgPath = (self.invtImageArray?.object(at: sender.tag-100) as! NSArray)[0] as! String
+                        myCart.unit = cells.dropDownBtn.titleLabel?.text
                         myCart.quantity = "1"
                         myCart.price = (cells.sellingPriceLabel.text)!
                         (UIApplication.shared.delegate as! AppDelegate).saveContext()
@@ -591,8 +651,12 @@ class ProductListViewController: UIViewController, UITableViewDataSource, UITabl
             myCart.invt_id = Int16(btn.tag)
             let cells: ProductListTableViewCell = sender.superview?.superview as! ProductListTableViewCell
             myCart.productName = nameArray?.object(at: sender.tag-100) as! String
-            myCart.imgPath = image_pathArray?.object(at: sender.tag-100) as! String
-            myCart.unit = (cells.weightLabel.text)!
+            if ((self.invtImageArray?.object(at: sender.tag-100) as! NSArray)[0] as! String) != nil {
+                myCart.imgPath = (self.invtImageArray?.object(at: sender.tag-100) as! NSArray)[0] as! String
+            }else{
+                myCart.imgPath = ""
+            }
+            myCart.unit = cells.dropDownBtn.titleLabel?.text
             myCart.quantity = "1"
             myCart.price = (cells.sellingPriceLabel.text)!
             (UIApplication.shared.delegate as! AppDelegate).saveContext()
@@ -607,9 +671,14 @@ class ProductListViewController: UIViewController, UITableViewDataSource, UITabl
 //        print(viewArray)
         let label: UILabel = self.navigationController?.navigationBar.viewWithTag(1001) as! UILabel
         label.text = String(describing: count)
+        self.activityIndicator.stopAnimating()
+        self.activityIndicator.isHidden = true
     }
     
     @objc func addWishlistOnline(sender: UIButton) {
+        self.activityIndicator.isHidden = false
+        self.activityIndicator.startAnimating()
+        
         cell?.myView?.isHidden = true
         let params: String
         print(sender.superview!)
@@ -659,6 +728,8 @@ class ProductListViewController: UIViewController, UITableViewDataSource, UITabl
                             //print("Data:- \(data!)")
                             if (!(error!)){
                                 sender.setImage(UIImage(named: "selected_wishlist"), for: .normal)
+                                self.activityIndicator.stopAnimating()
+                                self.activityIndicator.isHidden = true
                             }else{
                             }
                         }
@@ -816,15 +887,17 @@ class ProductListViewController: UIViewController, UITableViewDataSource, UITabl
                                 let count: Int = (UserDefaults.standard.value(forKey:"cartCount") as! Int)
                                 let label: UILabel = self.navigationController?.navigationBar.viewWithTag(1001) as! UILabel
                                 label.text = String(describing: count)
+                                self.activityIndicator.stopAnimating()
+                                self.activityIndicator.isHidden = true
                             }else{
-                                let alert = UIAlertController(title: "Not Registered", message: message?[0] as? String, preferredStyle:  UIAlertControllerStyle.alert)
-                                
-                                let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default)
-                                
-                                alert.addAction(okAction)
-                                
-                                // show the alert
-                                self.present(alert, animated: true, completion: nil)
+//                                let alert = UIAlertController(title: "Not Registered", message: message?[0] as? String, preferredStyle:  UIAlertControllerStyle.alert)
+//                                
+//                                let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default)
+//                                
+//                                alert.addAction(okAction)
+//                                
+//                                // show the alert
+//                                self.present(alert, animated: true, completion: nil)
                             }
                         }
                     }

@@ -19,19 +19,18 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
     @IBOutlet var homeTableView: UITableView!
     var cell1: CategoryTableViewCell?
     var cell2: StaticBannerTableViewCell?
-    var cell3: ViewMoreScrollTableViewCell?
+    var cell3: RecentViewTableViewCell?
     var cell4: TopBrandsTableViewCell?
-    var cell5: MostPopularTableViewCell?
-    var cell6: OffersTableViewCell?
+    var cell5: MostPopularProductTableViewCell?
+    var cell6: MostPopularTableViewCell?
+    var cell7: OffersTableViewCell?
     var sub: SubCategoryModel?
     var spinner: LLARingSpinnerView?
     var bannerImageArray: NSMutableArray = NSMutableArray()
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        if tableView == homeTableView {
+
             return 7
-//        }else{
-//            return arrayMenuOptions.count
-//        }
+
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -42,28 +41,30 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
                 tableView.register(UINib(nibName: "BannerScrollTableViewCell", bundle: nil), forCellReuseIdentifier: identifier)
                 cell = tableView.dequeueReusableCell(withIdentifier: identifier) as? BannerScrollTableViewCell
             }
+            cell.selectionStyle = .none
             cell.pageControl.numberOfPages = self.bannerImageArray.count
-                var Y: CGFloat = -1.0
+                var Y: CGFloat = 0.0
             
             for i in self.bannerImageArray {
-                
+                    var imageView: UIImageView?
                     if let path = (i as? String)
                     {
+                        imageView = UIImageView(frame: CGRect(x: Y, y: 0.0, width: self.homeTableView.frame.size.width+1, height: cell.bannerScroll.frame.size.height))
+                        imageView?.layer.masksToBounds = true
                         let url = URL(string: path)
+                        DispatchQueue.global().async {
                         let data = try? Data(contentsOf: url!)
-                        let imageView = UIImageView(frame: CGRect(x: Y, y: 0.0, width: homeTableView.frame.size.width+1, height: cell.bannerScroll.frame.size.height))
-                        imageView.layer.borderWidth=1.0
-                        imageView.layer.masksToBounds = true
-                        imageView.layer.borderColor = UIColor.white.cgColor
-                        //imageView.layer.cornerRadius = 50;// Corner radius should be half of the height and width.
                         if data != nil {
-                            imageView.image = UIImage(data: data!)
+                            DispatchQueue.main.async() {
+                                imageView?.image = UIImage(data: data!)
+                            }
                         }
-                        cell.bannerScroll.addSubview(imageView)
+                        }
+                        cell.bannerScroll.addSubview(imageView!)
                     }
                 Y=(homeTableView.frame.size.width+Y)
                 }
-                cell.bannerScroll.contentSize = CGSize(width: Y, height: 140.0)
+                cell.bannerScroll.contentSize = CGSize(width: Y, height: cell.bannerScroll.frame.size.height)
                 return cell
         } else if indexPath.row==1 {
             cell1 = self.homeTableView.dequeueReusableCell(withIdentifier: identifier) as? CategoryTableViewCell
@@ -71,6 +72,7 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
                 tableView.register(UINib(nibName: "CategoryTableViewCell", bundle: nil), forCellReuseIdentifier: identifier)
                 cell1 = tableView.dequeueReusableCell(withIdentifier: identifier) as? CategoryTableViewCell
             }
+            cell1?.selectionStyle = .none
             cell1?.sub_category = self.sub
             return cell1!
         }else if indexPath.row==2{
@@ -79,44 +81,73 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
                 tableView.register(UINib(nibName: "StaticBannerTableViewCell", bundle: nil), forCellReuseIdentifier: "Cell")
                 cell2 = tableView.dequeueReusableCell(withIdentifier: "Cell") as? StaticBannerTableViewCell
             }
+            cell2?.selectionStyle = .none
+            if self.bannerImageArray.count>0{
+                if let path = (self.bannerImageArray.object(at: 0) as? String)
+                {
+                    let url = URL(string: path)
+                    DispatchQueue.global().async {
+                    let data = try? Data(contentsOf: url!)
+                    if data != nil {
+                        DispatchQueue.main.async() {
+                            self.cell2?.imgView.image = UIImage(data: data!)
+                        }
+                    }
+                    }
+                }
+            }
             return cell2!
         } else if indexPath.row==3 {
-            cell3 = self.homeTableView.dequeueReusableCell(withIdentifier: "ViewMore") as? ViewMoreScrollTableViewCell
+            cell3 = self.homeTableView.dequeueReusableCell(withIdentifier: "recenView") as? RecentViewTableViewCell
             if cell3 == nil {
-                tableView.register(UINib(nibName: "ViewMoreScrollTableViewCell", bundle: nil), forCellReuseIdentifier: "ViewMore")
-                cell3 = tableView.dequeueReusableCell(withIdentifier: "ViewMore") as? ViewMoreScrollTableViewCell
+                tableView.register(UINib(nibName: "RecentViewTableViewCell", bundle: nil), forCellReuseIdentifier: "recenView")
+                cell3 = tableView.dequeueReusableCell(withIdentifier: "recenView") as? RecentViewTableViewCell
             }
+            cell3?.selectionStyle = .none
             return cell3!
-        }else if indexPath.row == 4{
-            cell4 = self.homeTableView.dequeueReusableCell(withIdentifier: "TopBrands") as? TopBrandsTableViewCell
-            if cell4 == nil {
-                tableView.register(UINib(nibName: "TopBrandsTableViewCell", bundle: nil), forCellReuseIdentifier: "TopBrands")
-                cell4 = tableView.dequeueReusableCell(withIdentifier: "TopBrands") as? TopBrandsTableViewCell
-            }
-            return cell4!
-        }else if indexPath.row == 5{
-            cell5 = self.homeTableView.dequeueReusableCell(withIdentifier: "MostPopular") as? MostPopularTableViewCell
-            if cell5 == nil {
-                tableView.register(UINib(nibName: "MostPopularTableViewCell", bundle: nil), forCellReuseIdentifier: "MostPopular")
-                cell5 = tableView.dequeueReusableCell(withIdentifier: "MostPopular") as? MostPopularTableViewCell
-            }
-            return cell5!
-        }else{
-            cell6 = self.homeTableView.dequeueReusableCell(withIdentifier: "Offers") as? OffersTableViewCell
-            if cell6 == nil {
-                tableView.register(UINib(nibName: "OffersTableViewCell", bundle: nil), forCellReuseIdentifier: "Offers")
-                cell6 = tableView.dequeueReusableCell(withIdentifier: "Offers") as? OffersTableViewCell
-            }
-            
-            return cell6!
         }
-        
+//        else if indexPath.row == 4{
+//            cell4 = self.homeTableView.dequeueReusableCell(withIdentifier: "TopBrands") as? TopBrandsTableViewCell
+//            if cell4 == nil {
+//                tableView.register(UINib(nibName: "TopBrandsTableViewCell", bundle: nil), forCellReuseIdentifier: "TopBrands")
+//                cell4 = tableView.dequeueReusableCell(withIdentifier: "TopBrands") as? TopBrandsTableViewCell
+//            }
+//            cell4?.selectionStyle = .none
+//            return cell4!
+//        }
+        else if indexPath.row == 4{
+            cell5 = self.homeTableView.dequeueReusableCell(withIdentifier: "MostPopularProduct") as? MostPopularProductTableViewCell
+            if cell5 == nil {
+                tableView.register(UINib(nibName: "MostPopularProductTableViewCell", bundle: nil), forCellReuseIdentifier: "MostPopularProduct")
+                cell5 = tableView.dequeueReusableCell(withIdentifier: "MostPopularProduct") as? MostPopularProductTableViewCell
+            }
+            cell5?.selectionStyle = .none
+            let label: UILabel = self.navigationController?.navigationBar.viewWithTag(1001) as! UILabel
+            cell5?.label = label
+            return cell5!
+        }else if indexPath.row == 5{
+            cell6 = self.homeTableView.dequeueReusableCell(withIdentifier: "MostPopular") as? MostPopularTableViewCell
+            if cell6 == nil {
+                tableView.register(UINib(nibName: "MostPopularTableViewCell", bundle: nil), forCellReuseIdentifier: "MostPopular")
+                cell6 = tableView.dequeueReusableCell(withIdentifier: "MostPopular") as? MostPopularTableViewCell
+            }
+            cell6?.selectionStyle = .none
+            return cell6!
+        }else{
+            cell7 = self.homeTableView.dequeueReusableCell(withIdentifier: "Offers") as? OffersTableViewCell
+            if cell7 == nil {
+                tableView.register(UINib(nibName: "OffersTableViewCell", bundle: nil), forCellReuseIdentifier: "Offers")
+                cell7 = tableView.dequeueReusableCell(withIdentifier: "Offers") as? OffersTableViewCell
+            }
+            cell7?.selectionStyle = .none
+            return cell7!
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         //if tableView == homeTableView {
         if(indexPath.row==0){
-            return 130.0
+            return 120.0
         }else if(indexPath.row==1){
             //return 200.0
             var screenSize: CGRect!
@@ -126,17 +157,17 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
             screenWidth = screenSize.width
             //screenHeight = screenSize.height
             let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-            layout.sectionInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
-            layout.itemSize = CGSize(width: 117.5, height: 117.5)
+            layout.sectionInset = UIEdgeInsets(top: 0, left: 10, bottom: 10, right: 10)
+            layout.itemSize = CGSize(width: (cell1?.collectionView.frame.size.width)!/2.15, height: (cell1?.collectionView.frame.size.width)!/2.15)
             layout.minimumInteritemSpacing = 1
-            layout.minimumLineSpacing = 1
+            layout.minimumLineSpacing = 5
             cell1?.collectionView!.collectionViewLayout = layout
             var frame: CGRect = cell1!.collectionView.frame
             if ((self.sub?.id) != nil) {
-            if((self.sub?.id?.count)!%3==0) {
-                frame.size.height = 125.0*CGFloat((self.sub?.id?.count)!)/3
+            if((self.sub?.id?.count)!%2==0) {
+                frame.size.height = ((cell1?.collectionView.frame.size.width)!/2)*CGFloat((self.sub?.id?.count)!)/2
             } else {
-                frame.size.height = 125.0*CGFloat(((self.sub?.id?.count)!)/3+1)
+                frame.size.height = ((cell1?.collectionView.frame.size.width)!/2)*CGFloat(((self.sub?.id?.count)!)/2+1)
             }
             }
             cell1?.collectionView.frame = frame
@@ -145,82 +176,103 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
             cell1?.frame = frame1
             if ((self.sub?.id) != nil) {
                 print(cell1!.nameLabel.frame.height+(CGFloat((self.sub?.id?.count)!))*100)
-                if((self.sub?.id?.count)!%3==0) {
-                    return cell1!.nameLabel.frame.height+((CGFloat((self.sub?.id?.count)!)/3)*130)
+                if((self.sub?.id?.count)!%2==0) {
+                    return cell1!.nameLabel.frame.height+((CGFloat((self.sub?.id?.count)!)/2)*(cell1?.collectionView.frame.size.width)!/2)+(cell1?.footerLabel.frame.size.height)!
                 } else {
-                    return cell1!.nameLabel.frame.height+(((CGFloat((self.sub?.id?.count)!)/3)+1)*110)
+                    return cell1!.nameLabel.frame.height+(((CGFloat((self.sub?.id?.count)!)/2)+1)*(cell1?.collectionView.frame.size.width)!/2)+(cell1?.footerLabel.frame.size.height)!
                 }
             }
-//            print(cell1?.nameLabel.frame.size.height)
-//            
-//            if ((self.sub?.id) != nil) {
-//                print(100*CGFloat((self.sub?.id?.count)!/3))
-//                print((cell1?.nameLabel.frame.size.height)!+(100*CGFloat((self.sub?.id?.count)!/3)))
-//                print(self.sub?.id?.count)
-//                return (cell1?.nameLabel.frame.size.height)!+(100*CGFloat((self.sub?.id?.count)!/3))
-//            }
+
             return 0.0
         }else if indexPath.row == 2{
             return 140.0
-        }else if indexPath.row == 3{
-            return 200.0
-        } else if indexPath.row == 4 {
-            return 200.0
+        }
+        else if indexPath.row == 3{
+            print(UserDefaults.standard.object(forKey: "recentView"))
+            let productsArray = UserDefaults.standard.object(forKey: "recentView") as! NSArray
+           print(productsArray)
+            if productsArray.count>0{
+            let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+            layout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 0)
+            layout.scrollDirection = .horizontal
+            layout.minimumLineSpacing = 5
+            cell3?.collectionView!.collectionViewLayout = layout
+            
+            return (cell3?.headerLabel.frame.size.height)!+(cell3?.collectionView.contentSize.height)!+(cell3?.footerLabel.frame.size.height)!
+            }
+            return 0.0
+        }
+//            else if indexPath.row == 4 {
+//            let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+//            layout.sectionInset = UIEdgeInsets(top: 0, left: 10, bottom: 10, right: 0)
+//            layout.scrollDirection = .horizontal
+//            cell4?.collectionView!.collectionViewLayout = layout
+//            return 200.0
+//        }
+            else if indexPath.row == 4{
+            let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+            layout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 0)
+            layout.scrollDirection = .horizontal
+            layout.minimumLineSpacing = 5
+            cell5?.collectionView!.collectionViewLayout = layout
+            
+            return (cell5?.headerLabel.frame.size.height)!+(cell5?.collectionView.contentSize.height)!+(cell5?.footerLabel.frame.size.height)!
         }else if indexPath.row == 5{
             var screenSize: CGRect!
             var screenWidth: CGFloat!
             //var screenHeight: CGFloat!
             screenSize = UIScreen.main.bounds
             screenWidth = screenSize.width
-//            //screenHeight = screenSize.height
+            //            //screenHeight = screenSize.height
             let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-            layout.sectionInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
-            layout.itemSize = CGSize(width: screenWidth/5, height: screenWidth/5)
-           layout.minimumInteritemSpacing = 1
-            layout.minimumLineSpacing = 1
-            cell5?.collectionView!.collectionViewLayout = layout
-//            var frame: CGRect = cell5!.collectionView.frame
-//            frame.size.height = (cell5?.collectionView.frame.size.width)!/5*2
-//            cell5?.collectionView.frame = frame
-//            var frame1: CGRect = cell5!.frame
-//            frame1.size.height = (cell5?.headerLabel.frame.size.height)!+(cell5?.collectionView.frame.size.height)!
-//            cell5?.frame = frame1
-            if ((cell5?.nameArray?.count) != nil) {
-                print(cell5!.headerLabel.frame.height+(CGFloat((cell5?.nameArray?.count)!))*100)
-                if((cell5?.nameArray?.count)!%2==0) {
-                    return cell5!.headerLabel.frame.height+((CGFloat((cell5?.nameArray?.count)!)/2)*110)
+            layout.sectionInset = UIEdgeInsets(top: 7, left: 7, bottom: 0, right: 7)
+            layout.itemSize = CGSize(width: (cell5?.collectionView.frame.size.width)!/2.12, height: 120.0)
+            layout.minimumInteritemSpacing = 1
+            layout.minimumLineSpacing = 7
+            cell6?.collectionView!.collectionViewLayout = layout
+            //            var frame: CGRect = cell5!.collectionView.frame
+            //            frame.size.height = (cell5?.collectionView.frame.size.width)!/5*2
+            //            cell5?.collectionView.frame = frame
+            //            var frame1: CGRect = cell5!.frame
+            //            frame1.size.height = (cell5?.headerLabel.frame.size.height)!+(cell5?.collectionView.frame.size.height)!
+            //            cell5?.frame = frame1
+            if ((cell6?.nameArray?.count) != nil) {
+                print(cell6!.headerLabel.frame.height+(CGFloat((cell6?.nameArray?.count)!))*120)
+                if((cell6?.nameArray?.count)!%2==0) {
+                    return cell6!.headerLabel.frame.height+((CGFloat((cell6?.nameArray?.count)!)/2)*130)
                 } else {
-                    return cell5!.headerLabel.frame.height+(((CGFloat((cell5?.nameArray?.count)!)/2)+1)*100)
+                    return cell6!.headerLabel.frame.height+(((CGFloat((cell6?.nameArray?.count)!)/2)+1)*120)
                 }
             }
             return 0.0
         }else{
-            print(cell6?.headerLabel.frame.size.height)
-            print(cell6?.collectionView.frame.size.height)
-            print(cell6?.nameArray?.count)
-            print((cell6?.headerLabel.frame.size.height)!+((cell6?.collectionView.frame.size.height)!*CGFloat((cell6?.nameArray?.count)!)))
+            print(cell7?.headerLabel.frame.size.height)
+            print(cell7?.collectionView.frame.size.height)
+            print(cell7?.nameArray?.count)
+            print((cell7?.headerLabel.frame.size.height)!+((cell7?.collectionView.frame.size.height)!*CGFloat((cell7?.nameArray?.count)!)))
 //            self.homeTableView.contentSize = CGSize(width: self.view.frame.size.width, height: (cell1?.frame.size.height)!+(cell2?.frame.size.height)!+(cell3?.frame.size.height)!+(cell4?.frame.size.height)!+(cell5?.frame.size.height)!+cell6?.headerLabel.frame.size.height+(85*CGFloat((cell6?.nameArray?.count)!+1))
-            return (cell6?.headerLabel.frame.size.height)!+(85*CGFloat((cell6?.nameArray?.count)!+1))
+           print(cell7?.image_pathArray)
+            return (cell7?.headerLabel.frame.size.height)!+((85*CGFloat((cell7?.image_pathArray?.count)!)+1))
         }
 
     }
     
-    @objc func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.row==1 {
-            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-            
-            let nextViewController = storyBoard.instantiateViewController(withIdentifier: "ProductListViewController") as! ProductListViewController
-            nextViewController.data = cell1?.data
-            self.navigationController?.pushViewController(nextViewController, animated: true)
-            
-        }
-    }
+//    @objc func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        if indexPath.row==1 {
+//            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+//            
+//            let nextViewController = storyBoard.instantiateViewController(withIdentifier: "ProductListViewController") as! ProductListViewController
+//            nextViewController.data = cell1?.data
+//            self.navigationController?.pushViewController(nextViewController, animated: true)
+//            
+//        }
+//    }
     
     
     @objc func getSubCategory(){
         let params: String
         
-        params =  "category_id=9"
+        params =  "category_id=1"
         
         let urlString = BASE_URL + "sub-category?" + params
         print(urlString)
@@ -292,6 +344,8 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
                                 let sub_category = SubCategoryModel.init(id: idArray, ukey: ukeyArray, name: nameArray, slug: slugArray, title: titleArray, image: imageArray, image_path: image_pathArray, keywords: keywordsArray, descrip: descripArray, type: typeArray, parent: parentArray, status: statusArray, created_at: created_atArray)
                                 self.sub = sub_category
                                 self.homeTableView.reloadData()
+                                self.activityIndicator.stopAnimating()
+                                self.activityIndicator.isHidden = true
                             }else{
                             }
                         }
@@ -349,7 +403,7 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        activityIndicator.startAnimating()
+        
 //        spinner?.startAnimating()
         //self.navigationItem.setHidesBackButton(true, animated: false)
         // Do any additional setup after loading the view.
@@ -357,8 +411,9 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        startAnimating(view: self.view)
-        
+        //startAnimating(view: self.view)
+        self.activityIndicator.isHidden = false
+        activityIndicator.startAnimating()
         //let height = CGFloat(80)
         //self.navigationController?.navigationBar.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 100.0)
         if (self.homeTableView.contentSize.height < self.homeTableView.frame.size.height) {
@@ -511,7 +566,7 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
                                 }
                                 
                                 self.getSubCategory()
-                                self.activityIndicator.stopAnimating()
+                                
                             }else{
                             }
                         }
@@ -541,6 +596,7 @@ class HomePageViewController: UIViewController, UITableViewDelegate, UITableView
             
         }
     }
+    
 
     /*
     // MARK: - Navigation

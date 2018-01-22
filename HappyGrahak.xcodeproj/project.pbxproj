@@ -7,14 +7,28 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		81022E70200F1E3C002FA640 /* CustomNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81022E6F200F1E3C002FA640 /* CustomNavigationBar.swift */; };
+		81042A982008F0E000CEBDD2 /* TimeSlotTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81042A962008F0E000CEBDD2 /* TimeSlotTableViewCell.swift */; };
+		81042A992008F0E000CEBDD2 /* TimeSlotTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81042A972008F0E000CEBDD2 /* TimeSlotTableViewCell.xib */; };
+		8107E4B6200CDF9E00C17EB5 /* MostPopularProductTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8107E4B4200CDF9E00C17EB5 /* MostPopularProductTableViewCell.swift */; };
+		8107E4B7200CDF9E00C17EB5 /* MostPopularProductTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8107E4B5200CDF9E00C17EB5 /* MostPopularProductTableViewCell.xib */; };
+		8107E4BA200CE0C000C17EB5 /* MostPopularProductCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8107E4B8200CE0C000C17EB5 /* MostPopularProductCollectionViewCell.swift */; };
+		8107E4BB200CE0C000C17EB5 /* MostPopularProductCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8107E4B9200CE0C000C17EB5 /* MostPopularProductCollectionViewCell.xib */; };
+		810929CA20107A7E007D4A6F /* TermsConditionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810929C920107A7E007D4A6F /* TermsConditionsViewController.swift */; };
+		81F79E452013239000745743 /* AllCategoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81F79E432013238F00745743 /* AllCategoriesViewController.swift */; };
+		81F79E462013239000745743 /* AllCategoriesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81F79E442013238F00745743 /* AllCategoriesViewController.xib */; };
+		81F79E4D2013644C00745743 /* RecentViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81F79E4B2013644C00745743 /* RecentViewTableViewCell.swift */; };
+		81F79E4E2013644C00745743 /* RecentViewTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81F79E4C2013644C00745743 /* RecentViewTableViewCell.xib */; };
 		81FC4B8D1FBEF0DB0021DBC1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81FC4B8B1FBEF0DB0021DBC1 /* Main.storyboard */; };
 		81FC4B901FBEF0DB0021DBC1 /* HappyGrahak.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 81FC4B8E1FBEF0DB0021DBC1 /* HappyGrahak.xcdatamodeld */; };
 		81FC4B921FBEF0DB0021DBC1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 81FC4B911FBEF0DB0021DBC1 /* Assets.xcassets */; };
 		81FC4B951FBEF0DB0021DBC1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81FC4B931FBEF0DB0021DBC1 /* LaunchScreen.storyboard */; };
 		81FC4BA01FBEF0DB0021DBC1 /* HappyGrahakTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FC4B9F1FBEF0DB0021DBC1 /* HappyGrahakTests.swift */; };
 		81FC4BAB1FBEF0DB0021DBC1 /* HappyGrahakUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FC4BAA1FBEF0DB0021DBC1 /* HappyGrahakUITests.swift */; };
+		81FCED07200A40D4009071CD /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81FCED06200A40D3009071CD /* UserNotifications.framework */; };
 		81FD2A5C1FC581B80065FD16 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81FD2A5B1FC581B80065FD16 /* Foundation.framework */; };
 		81FD2A5E1FC581C10065FD16 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81FD2A5D1FC581C00065FD16 /* SystemConfiguration.framework */; };
+		81FF8D8120072820006277E1 /* OnBoardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FF8D8020072820006277E1 /* OnBoardingViewController.swift */; };
 		B2405B4720048D5F0044551A /* CAPSPageMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = B2405ACD20048D5E0044551A /* CAPSPageMenu.m */; };
 		B2405B4820048D5F0044551A /* CAPSPageMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = B2405ACD20048D5E0044551A /* CAPSPageMenu.m */; };
 		B2405B4920048D5F0044551A /* CAPSPageMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = B2405ACD20048D5E0044551A /* CAPSPageMenu.m */; };
@@ -344,7 +358,23 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		81022E6F200F1E3C002FA640 /* CustomNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationBar.swift; sourceTree = "<group>"; };
+		81042A962008F0E000CEBDD2 /* TimeSlotTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSlotTableViewCell.swift; sourceTree = "<group>"; };
+		81042A972008F0E000CEBDD2 /* TimeSlotTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TimeSlotTableViewCell.xib; sourceTree = "<group>"; };
+		8107E4B4200CDF9E00C17EB5 /* MostPopularProductTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MostPopularProductTableViewCell.swift; sourceTree = "<group>"; };
+		8107E4B5200CDF9E00C17EB5 /* MostPopularProductTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MostPopularProductTableViewCell.xib; sourceTree = "<group>"; };
+		8107E4B8200CE0C000C17EB5 /* MostPopularProductCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MostPopularProductCollectionViewCell.swift; sourceTree = "<group>"; };
+		8107E4B9200CE0C000C17EB5 /* MostPopularProductCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MostPopularProductCollectionViewCell.xib; sourceTree = "<group>"; };
+		810929C920107A7E007D4A6F /* TermsConditionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsConditionsViewController.swift; sourceTree = "<group>"; };
 		81CDB45B1FF0F7A900C05CB0 /* HappyGrahak-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HappyGrahak-Bridging-Header.h"; sourceTree = "<group>"; };
+		81F79E432013238F00745743 /* AllCategoriesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllCategoriesViewController.swift; sourceTree = "<group>"; };
+		81F79E442013238F00745743 /* AllCategoriesViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AllCategoriesViewController.xib; sourceTree = "<group>"; };
+		81F79E472013530400745743 /* reward.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = reward.png; sourceTree = "<group>"; };
+		81F79E482013530500745743 /* user.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = user.png; sourceTree = "<group>"; };
+		81F79E492013530500745743 /* registration.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = registration.png; sourceTree = "<group>"; };
+		81F79E4A201362A700745743 /* order-details.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "order-details.png"; path = "../../../Downloads/order-details.png"; sourceTree = "<group>"; };
+		81F79E4B2013644C00745743 /* RecentViewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentViewTableViewCell.swift; sourceTree = "<group>"; };
+		81F79E4C2013644C00745743 /* RecentViewTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RecentViewTableViewCell.xib; sourceTree = "<group>"; };
 		81FC4B841FBEF0DB0021DBC1 /* HappyGrahak.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HappyGrahak.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		81FC4B8C1FBEF0DB0021DBC1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		81FC4B8F1FBEF0DB0021DBC1 /* HappyGrahak.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = HappyGrahak.xcdatamodel; sourceTree = "<group>"; };
@@ -357,8 +387,10 @@
 		81FC4BA61FBEF0DB0021DBC1 /* HappyGrahakUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HappyGrahakUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		81FC4BAA1FBEF0DB0021DBC1 /* HappyGrahakUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HappyGrahakUITests.swift; sourceTree = "<group>"; };
 		81FC4BAC1FBEF0DB0021DBC1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		81FCED06200A40D3009071CD /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		81FD2A5B1FC581B80065FD16 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		81FD2A5D1FC581C00065FD16 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		81FF8D8020072820006277E1 /* OnBoardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingViewController.swift; sourceTree = "<group>"; };
 		B2405ACC20048D5E0044551A /* CAPSPageMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CAPSPageMenu.h; sourceTree = "<group>"; };
 		B2405ACD20048D5E0044551A /* CAPSPageMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CAPSPageMenu.m; sourceTree = "<group>"; };
 		B2405ACE20048D5E0044551A /* CustomLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomLabel.swift; sourceTree = "<group>"; };
@@ -482,6 +514,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				81FCED07200A40D4009071CD /* UserNotifications.framework in Frameworks */,
 				81FD2A5E1FC581C10065FD16 /* SystemConfiguration.framework in Frameworks */,
 				81FD2A5C1FC581B80065FD16 /* Foundation.framework in Frameworks */,
 			);
@@ -529,6 +562,10 @@
 			isa = PBXGroup;
 			children = (
 				B2F0D9042004C24E0034DCCA /* HappyGrahak.entitlements */,
+				81F79E492013530500745743 /* registration.png */,
+				81F79E472013530400745743 /* reward.png */,
+				81F79E482013530500745743 /* user.png */,
+				81F79E4A201362A700745743 /* order-details.png */,
 				B2405B0420048D5F0044551A /* Build Order Module */,
 				B2405B1120048D5F0044551A /* Home Module */,
 				B2405AF220048D5F0044551A /* LatoFont */,
@@ -542,6 +579,7 @@
 				81FC4B961FBEF0DB0021DBC1 /* Info.plist */,
 				81FC4B8E1FBEF0DB0021DBC1 /* HappyGrahak.xcdatamodeld */,
 				81CDB45B1FF0F7A900C05CB0 /* HappyGrahak-Bridging-Header.h */,
+				81FF8D8020072820006277E1 /* OnBoardingViewController.swift */,
 			);
 			path = HappyGrahak;
 			sourceTree = "<group>";
@@ -567,6 +605,7 @@
 		81FD2A5A1FC581B80065FD16 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				81FCED06200A40D3009071CD /* UserNotifications.framework */,
 				81FD2A5D1FC581C00065FD16 /* SystemConfiguration.framework */,
 				81FD2A5B1FC581B80065FD16 /* Foundation.framework */,
 			);
@@ -583,6 +622,7 @@
 				B2405AD020048D5E0044551A /* LLARingSpinnerView.h */,
 				B2405AD120048D5E0044551A /* LLARingSpinnerView.m */,
 				B2405AD220048D5E0044551A /* Macro.h */,
+				81022E6F200F1E3C002FA640 /* CustomNavigationBar.swift */,
 				B2405AD320048D5E0044551A /* Slider */,
 			);
 			path = "Third Party";
@@ -677,6 +717,8 @@
 				B2405B0E20048D5F0044551A /* ItemListTableViewCell.xib */,
 				B2405B0F20048D5F0044551A /* MyCartTableViewCell.swift */,
 				B2405B1020048D5F0044551A /* MyCartTableViewCell.xib */,
+				81042A962008F0E000CEBDD2 /* TimeSlotTableViewCell.swift */,
+				81042A972008F0E000CEBDD2 /* TimeSlotTableViewCell.xib */,
 			);
 			path = "TableView Cells";
 			sourceTree = "<group>";
@@ -710,6 +752,10 @@
 				B2405B1B20048D5F0044551A /* SuperSaverCollectionCollectionViewCell.xib */,
 				B2405B1C20048D5F0044551A /* TopBrandsCollectionViewCell.swift */,
 				B2405B1D20048D5F0044551A /* TopBrandsCollectionViewCell.xib */,
+				8107E4B8200CE0C000C17EB5 /* MostPopularProductCollectionViewCell.swift */,
+				8107E4B9200CE0C000C17EB5 /* MostPopularProductCollectionViewCell.xib */,
+				81F79E432013238F00745743 /* AllCategoriesViewController.swift */,
+				81F79E442013238F00745743 /* AllCategoriesViewController.xib */,
 			);
 			path = "CollectionView Cells";
 			sourceTree = "<group>";
@@ -733,6 +779,10 @@
 				B2405B3220048D5F0044551A /* TopBrandsTableViewCell.xib */,
 				B2405B3320048D5F0044551A /* ViewMoreScrollTableViewCell.swift */,
 				B2405B3420048D5F0044551A /* ViewMoreScrollTableViewCell.xib */,
+				8107E4B4200CDF9E00C17EB5 /* MostPopularProductTableViewCell.swift */,
+				8107E4B5200CDF9E00C17EB5 /* MostPopularProductTableViewCell.xib */,
+				81F79E4B2013644C00745743 /* RecentViewTableViewCell.swift */,
+				81F79E4C2013644C00745743 /* RecentViewTableViewCell.xib */,
 			);
 			path = "TableView Cells";
 			sourceTree = "<group>";
@@ -751,6 +801,7 @@
 				B2405B3E20048D5F0044551A /* WishListTableViewCell.xib */,
 				B2405C76200491B00044551A /* WishListViewController.swift */,
 				B2405C77200491B00044551A /* WishListViewController.xib */,
+				810929C920107A7E007D4A6F /* TermsConditionsViewController.swift */,
 			);
 			path = "Left Slider Controller";
 			sourceTree = "<group>";
@@ -885,9 +936,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				81F79E462013239000745743 /* AllCategoriesViewController.xib in Resources */,
 				B2405B9820048D5F0044551A /* Lato-Bold_0.ttf in Resources */,
 				B2405C4320048D5F0044551A /* ViewMoreScrollTableViewCell.xib in Resources */,
 				B2405C5E20048D5F0044551A /* WishListTableViewCell.xib in Resources */,
+				81042A992008F0E000CEBDD2 /* TimeSlotTableViewCell.xib in Resources */,
 				B2405BB320048D5F0044551A /* Lato-Regular_0.ttf in Resources */,
 				B2405BA720048D5F0044551A /* Lato-Light.ttf in Resources */,
 				B2405BF520048D5F0044551A /* OffersCollectionViewCell.xib in Resources */,
@@ -895,7 +948,9 @@
 				B2405C3120048D5F0044551A /* ProductListTableViewCell.xib in Resources */,
 				B2405BA120048D5F0044551A /* Lato-HeavyItalic.ttf in Resources */,
 				B2405B9B20048D5F0044551A /* Lato-BoldItalic_0.ttf in Resources */,
+				81F79E4E2013644C00745743 /* RecentViewTableViewCell.xib in Resources */,
 				B2405C2520048D5F0044551A /* MostPopularTableViewCell.xib in Resources */,
+				8107E4BB200CE0C000C17EB5 /* MostPopularProductCollectionViewCell.xib in Resources */,
 				81FC4B951FBEF0DB0021DBC1 /* LaunchScreen.storyboard in Resources */,
 				B2405B9220048D5F0044551A /* Lato-Black_0.ttf in Resources */,
 				B2405C3D20048D5F0044551A /* TopBrandsTableViewCell.xib in Resources */,
@@ -930,6 +985,7 @@
 				B2405BE920048D5F0044551A /* CategoryCollectionViewCell.xib in Resources */,
 				B2405BEF20048D5F0044551A /* MostPopularCollectionViewCell.xib in Resources */,
 				B2405BD420048D5F0044551A /* AddressTableViewCell.xib in Resources */,
+				8107E4B7200CDF9E00C17EB5 /* MostPopularProductTableViewCell.xib in Resources */,
 				B2405BBC20048D5F0044551A /* Lato-Thin.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1041,13 +1097,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				810929CA20107A7E007D4A6F /* TermsConditionsViewController.swift in Sources */,
+				81022E70200F1E3C002FA640 /* CustomNavigationBar.swift in Sources */,
 				B2405B5C20048D5F0044551A /* RightBarTableViewCell.m in Sources */,
 				B2405BDD20048D5F0044551A /* MyCartTableViewCell.swift in Sources */,
 				B2405B5320048D5F0044551A /* BlankTableViewCell.m in Sources */,
 				B2405C0720048D5F0044551A /* HomeViewController.swift in Sources */,
 				B2405C5B20048D5F0044551A /* WishListTableViewCell.swift in Sources */,
 				B2405C1320048D5F0044551A /* SearchViewController.swift in Sources */,
+				8107E4BA200CE0C000C17EB5 /* MostPopularProductCollectionViewCell.swift in Sources */,
 				B2405C1620048D5F0044551A /* BannerScrollTableViewCell.swift in Sources */,
+				81FF8D8120072820006277E1 /* OnBoardingViewController.swift in Sources */,
 				B2405C6720048D5F0044551A /* LocationViewController.swift in Sources */,
 				B2405B6220048D5F0044551A /* RightSideViewController.m in Sources */,
 				B2405C4620048D5F0044551A /* AboutUsViewController.swift in Sources */,
@@ -1082,10 +1142,12 @@
 				B2405BF820048D5F0044551A /* SuperSaverCollectionCollectionViewCell.swift in Sources */,
 				B2405C0A20048D5F0044551A /* OffersViewController.swift in Sources */,
 				81FC4B901FBEF0DB0021DBC1 /* HappyGrahak.xcdatamodeld in Sources */,
+				8107E4B6200CDF9E00C17EB5 /* MostPopularProductTableViewCell.swift in Sources */,
 				B2405BE320048D5F0044551A /* AllImageViewController.swift in Sources */,
 				B2405C6D20048D5F0044551A /* OTPViewController.swift in Sources */,
 				B2405B5920048D5F0044551A /* JASidePanelController.m in Sources */,
 				B2405B4D20048D5F0044551A /* Helper.swift in Sources */,
+				81F79E452013239000745743 /* AllCategoriesViewController.swift in Sources */,
 				B2405C6A20048D5F0044551A /* LoginViewController.swift in Sources */,
 				B2405B8620048D5F0044551A /* ProductDetailsModel.swift in Sources */,
 				B2405BD720048D5F0044551A /* ItemListTableViewCell.swift in Sources */,
@@ -1101,6 +1163,8 @@
 				B2405BCE20048D5F0044551A /* OrderDetailsViewController.swift in Sources */,
 				B2405C7020048D5F0044551A /* SignUpViewController.swift in Sources */,
 				B2405C6420048D5F0044551A /* ForgotViewController.swift in Sources */,
+				81042A982008F0E000CEBDD2 /* TimeSlotTableViewCell.swift in Sources */,
+				81F79E4D2013644C00745743 /* RecentViewTableViewCell.swift in Sources */,
 				B2405BF220048D5F0044551A /* OffersCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1401,6 +1465,10 @@
 				INFOPLIST_FILE = HappyGrahak/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/HappyGrahak/chilkat-9.5.0-macosx-objc/lib",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = HappyPesa.HappyGrahak;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "HappyGrahak/HappyGrahak-Bridging-Header.h";
@@ -1427,6 +1495,10 @@
 				INFOPLIST_FILE = HappyGrahak/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/HappyGrahak/chilkat-9.5.0-macosx-objc/lib",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = HappyPesa.HappyGrahak;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "HappyGrahak/HappyGrahak-Bridging-Header.h";

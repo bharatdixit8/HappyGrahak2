@@ -12,6 +12,7 @@ class ForgotViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet var mobileTextField: UITextField!
     @IBOutlet var sendOTPBtn: UIButton!
+   
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -45,7 +46,7 @@ class ForgotViewController: UIViewController, UITextFieldDelegate {
         return true
     }
     
-    @objc func backAction() -> Void {
+    @objc func backAction(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
     }
 

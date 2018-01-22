@@ -49,7 +49,11 @@ class ViewMoreScrollTableViewCell: UITableViewCell, UICollectionViewDelegate, UI
         {
             let url = URL(string: path)
             let data = try? Data(contentsOf: url!)
-            collectionCell.imgView.image = UIImage(data: data!)
+            if data != nil{
+                collectionCell.imgView.image = UIImage(data: data!)
+            }else{
+                collectionCell.imgView.image = UIImage(named: "default_product_icon")
+            }
         }
         else
         {

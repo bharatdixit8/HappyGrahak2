@@ -39,6 +39,7 @@ static char ja_kvoContext;
 @interface JASidePanelController() {
     CGRect _centerPanelRestingFrame;		
     CGPoint _locationBeforePan;
+    
 }
 
 @property (nonatomic, readwrite) JASidePanelState state;
@@ -49,7 +50,6 @@ static char ja_kvoContext;
 @property (nonatomic, strong) UIView *leftPanelContainer;
 @property (nonatomic, strong) UIView *rightPanelContainer;
 @property (nonatomic, strong) UIView *centerPanelContainer;
-
 @end
 
 @implementation JASidePanelController
@@ -475,6 +475,7 @@ static char ja_kvoContext;
         }
         if (!buttonController.navigationItem.leftBarButtonItem) {   
             buttonController.navigationItem.leftBarButtonItem = [self leftButtonForCenterPanel];
+
         }
     }	
 }

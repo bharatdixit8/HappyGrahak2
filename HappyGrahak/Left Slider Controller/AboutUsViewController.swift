@@ -20,7 +20,7 @@ class AboutUsViewController: UIViewController, WKUIDelegate {
         myWebView.uiDelegate = self
         view = myWebView
         
-        let myURL = URL(string: "http://10.107.4.131:8000/about-us")
+        let myURL = URL(string: "https://www.happygrahak.com/about-us")
         let myRequest = URLRequest(url: myURL!)
         myWebView.load(myRequest)
         // Do any additional setup after loading the view.
@@ -38,7 +38,7 @@ class AboutUsViewController: UIViewController, WKUIDelegate {
         self.navigationItem.title = "About Us"
         self.navigationItem.hidesBackButton = true
         
-        self.navigationController!.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white, NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 18.0)]
+        self.navigationController!.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.black, NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 18.0)]
     }
     
     override func viewWillDisappear(_ animated: Bool) {

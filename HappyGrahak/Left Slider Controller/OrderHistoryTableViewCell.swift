@@ -14,16 +14,13 @@ class OrderHistoryTableViewCell: UITableViewCell {
     @IBOutlet var amountLabel: UILabel!
     @IBOutlet var itemsOrderedList: UILabel!
     @IBOutlet var timerLabel: UILabel!
-    @IBOutlet var trackerView: UIProgressView!
     @IBOutlet var pendingLabel: UILabel!
     @IBOutlet var progressLabel: UILabel!
     @IBOutlet var dispatchLabel: UILabel!
     @IBOutlet var deliveredLabel: UILabel!
     @IBOutlet var cancelBtn: UIButton!
-    @IBOutlet var pendingImage: UIImageView!
-    @IBOutlet var deliveredImage: UIImageView!
-    @IBOutlet var progressImage: UIImageView!
-    @IBOutlet var dispatchImage: UIImageView!
+    @IBOutlet var oFDelivery: UILabel!
+    @IBOutlet var progressImg: UIImageView!
     override func awakeFromNib() {
         super.awakeFromNib()
         cancelBtn.layer.borderWidth = 1.0
